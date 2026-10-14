@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-10-14)
 
 **Core value:** Accessible, credible, and thought-provoking educational content on Philippine societal issues, presented with journalistic integrity, clear citations, and an editorial aesthetic that promotes active learning.  
-**Current focus:** Phase 1: Project Foundation & Database Architecture
+**Current focus:** Phase 2: Global Shell, Navigation & Static Pages
 
 ## Current Position
 
-Phase: 1 of 6 (Project Foundation & Database Architecture)  
-Plan: 2 of 2 in current phase  
-Status: Phase complete  
-Last activity: 2026-10-14 — Phase 1 executed (all 2 plans complete)  
+Phase: 2 of 6 (Global Shell, Navigation & Static Pages)  
+Plan: 0 of 3 in current phase  
+Status: Ready to plan  
+Last activity: 2026-10-14 — Phase 2 context gathered and decisions confirmed  
 
 Progress: [██░░░░░░░░] 11%
 
@@ -52,6 +52,7 @@ Recent decisions affecting current work:
 - [Init]: Supabase for PostgreSQL, Auth, and Storage with RLS and `is_admin()` security definer function.
 - [Init]: Build all P0, P1, and P2 user stories across 6 vertical MVP phases.
 - [Phase 1]: Use src/ directory, domain-driven components, @/* alias, versioned SQL migrations in supabase/migrations/, @supabase/ssr, seed all 7 canonical themes with sample subtopics.
+- [Phase 2]: Root `/` serves Landing page (Landing.png); `/home` serves topic portal; Content Drawer uses single-topic accordion with active route auto-expansion; inline head script ensures zero-FOUC theme switching; editorial contact and privacy pages.
 
 ### Pending Todos
 
@@ -72,7 +73,7 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-10-14  
-Stopped at: Phase 1 execution complete  
-Resume file: .planning/phases/01-project-foundation-database-architecture/01-02-SUMMARY.md
+Stopped at: Phase 2 discussion complete  
+Resume file: .planning/phases/02-global-shell-navigation-static-pages/02-CONTEXT.md
 
 
