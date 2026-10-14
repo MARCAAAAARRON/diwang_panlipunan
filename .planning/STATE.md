@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-10-14)
 
 **Core value:** Accessible, credible, and thought-provoking educational content on Philippine societal issues, presented with journalistic integrity, clear citations, and an editorial aesthetic that promotes active learning.  
-**Current focus:** Phase 2: Global Shell, Navigation & Static Pages
+**Current focus:** Phase 3: Core Discovery & Subtopic Reading Experience
 
 ## Current Position
 
-Phase: 2 of 6 (Global Shell, Navigation & Static Pages)  
-Plan: 3 of 3 in current phase  
-Status: Phase complete  
-Last activity: 2026-10-14 — Phase 2 executed (all 3 plans complete)  
+Phase: 3 of 6 (Core Discovery & Subtopic Reading Experience)  
+Plan: 0 of 3 in current phase  
+Status: Ready to plan  
+Last activity: 2026-10-14 — Phase 3 context gathered and decisions confirmed  
 
 Progress: [████░░░░░░] 28%
 
@@ -53,6 +53,7 @@ Recent decisions affecting current work:
 - [Init]: Build all P0, P1, and P2 user stories across 6 vertical MVP phases.
 - [Phase 1]: Use src/ directory, domain-driven components, @/* alias, versioned SQL migrations in supabase/migrations/, @supabase/ssr, seed all 7 canonical themes with sample subtopics.
 - [Phase 2]: Root `/` serves Landing page (Landing.png); `/home` serves topic portal; Content Drawer uses single-topic accordion with active route auto-expansion; inline head script ensures zero-FOUC theme switching; editorial contact and privacy pages.
+- [Phase 3]: Nested routing `/topics/[topic]/[subtopic]`, `react-markdown` with GFM and superscript citation jumps to `#sanggunian`, Server Components with resilient seed fallback, desktop 1280px+ sticky editorial left sidebar.
 
 ### Pending Todos
 
@@ -73,7 +74,7 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-10-14  
-Stopped at: Phase 2 execution complete  
-Resume file: .planning/phases/02-global-shell-navigation-static-pages/02-03-SUMMARY.md
+Stopped at: Phase 3 discussion complete  
+Resume file: .planning/phases/03-core-discovery-subtopic-reading-experience/03-CONTEXT.md
 
 
