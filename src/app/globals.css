@@ -83,3 +83,17 @@ body {
   max-width: 68ch;
   line-height: 1.7;
 }
+
+@keyframes citationFlash {
+  0% {
+    background-color: var(--color-highlight);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.citation-highlight {
+  animation: citationFlash 2s ease-out;
+  border-radius: 4px;
+}

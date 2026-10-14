@@ -9,19 +9,19 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 ### Discovery & Reading Experience
 
-- [ ] **DISC-01**: User can browse 7 core societal thematic topics with title, Filipino description, icon/imagery, and subtopic list
-- [ ] **DISC-02**: User can view subtopic count and publication status for each topic
-- [ ] **READ-01**: User can read subtopic article with title, executive summary, reading time estimate, and formatted Markdown content
-- [ ] **READ-02**: User sees topic-specific accent colorway applied to article headers and banners
+- [x] **DISC-01**: User can browse 7 core societal thematic topics with title, Filipino description, icon/imagery, and subtopic list
+- [x] **DISC-02**: User can view subtopic count and publication status for each topic
+- [x] **READ-01**: User can read subtopic article with title, executive summary, reading time estimate, and formatted Markdown content
+- [x] **READ-02**: User sees topic-specific accent colorway applied to article headers and banners
 - [ ] **READ-03**: User can view a reading depth / progress indicator while scrolling through an article
 - [ ] **READ-04**: User can print or export article to PDF with clean layout stripping web navigation chrome
 - [ ] **READ-05**: User can view curated related subtopics at the footer of each article
 
 ### Sources & Academic Rigor
 
-- [ ] **SRC-01**: User can view a formatted citations section per article with author, publication, date, and external link
-- [ ] **SRC-02**: Citation external links open safely in a new tab with security attributes (`rel="noopener noreferrer"`)
-- [ ] **SRC-03**: In-text citation anchors smoothly navigate to the corresponding reference entry
+- [x] **SRC-01**: User can view a formatted citations section per article with author, publication, date, and external link
+- [x] **SRC-02**: Citation external links open safely in a new tab with security attributes (`rel="noopener noreferrer"`)
+- [x] **SRC-03**: In-text citation anchors smoothly navigate to the corresponding reference entry
 
 ### Navigation & Global Shell
 
