@@ -9,6 +9,8 @@ import {
   LogOut,
   ExternalLink,
   ShieldCheck,
+  MessageSquare,
+  Lightbulb,
 } from "lucide-react";
 
 export default async function AdminDashboardLayout({
@@ -104,6 +106,22 @@ export default async function AdminDashboardLayout({
             >
               <BookOpen className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
               <span>Mga Aralin</span>
+            </Link>
+
+            <Link
+              href="/admin/feedback"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+              <span>Mga Tugon</span>
+            </Link>
+
+            <Link
+              href="/admin/suggestions"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
+            >
+              <Lightbulb className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+              <span>Mga Mungkahi</span>
             </Link>
           </nav>
         </div>
