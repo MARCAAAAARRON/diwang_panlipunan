@@ -15,6 +15,10 @@ const nextConfig = {
         source: "/privacy",
         destination: "/patakaran-sa-privacy",
       },
+      {
+        source: "/mga-paksa",
+        destination: "/topics",
+      },
     ];
   },
 };
