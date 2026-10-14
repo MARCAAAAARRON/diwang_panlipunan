@@ -154,7 +154,7 @@ export function SearchModal() {
                 <X className="w-4 h-4" />
               </button>
             )}
-            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text-muted)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded">
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text-muted)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded">
               ESC
             </kbd>
           </div>
@@ -168,7 +168,7 @@ export function SearchModal() {
               <p className="font-serif text-sm font-semibold text-[var(--color-text)]">
                 Walang natagpuang aralin para sa &ldquo;{query}&rdquo;
               </p>
-              <p className="font-sans text-[11px] max-w-sm mx-auto">
+              <p className="font-sans text-xs text-[var(--color-text-muted)] max-w-sm mx-auto">
                 Subukan ang ibang mga termino tulad ng <em>klima</em>, <em>kalusugan</em>, o <em>demokrasya</em>.
               </p>
             </div>
@@ -196,7 +196,7 @@ export function SearchModal() {
                       style={{ backgroundColor: `var(${item.topicColorToken})` }}
                       aria-hidden="true"
                     />
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-muted)]">
+                    <span className="font-mono text-xs font-bold uppercase tracking-[0.06em] text-[var(--color-text-muted)]">
                       {item.topicNameFil}
                     </span>
                   </div>
@@ -207,7 +207,7 @@ export function SearchModal() {
                       <span>{item.readTimeMinutes} min</span>
                     </span>
                     {isSelected && (
-                      <span className="hidden sm:flex items-center gap-1 text-[10px] font-semibold text-[var(--color-primary)]">
+                      <span className="hidden sm:flex items-center gap-1 text-xs font-mono font-semibold text-[var(--color-primary)]">
                         <span>Pumunta</span>
                         <CornerDownLeft className="w-3 h-3" />
                       </span>
@@ -231,7 +231,7 @@ export function SearchModal() {
 
         {/* Modal Footer */}
         <div className="p-3 bg-[var(--color-bg)] border-t border-[var(--color-border)] flex items-center justify-between text-xs font-mono text-[var(--color-text-muted)]">
-          <div className="hidden sm:flex items-center gap-3 text-[11px]">
+          <div className="hidden sm:flex items-center gap-3">
             <span><kbd className="px-1 border border-[var(--color-border)] rounded bg-[var(--color-surface)]">↑</kbd> <kbd className="px-1 border border-[var(--color-border)] rounded bg-[var(--color-surface)]">↓</kbd> mag-navigate</span>
             <span><kbd className="px-1 border border-[var(--color-border)] rounded bg-[var(--color-surface)]">Enter</kbd> pumili</span>
           </div>

@@ -78,25 +78,25 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
     switch (status) {
       case "pending":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-semibold tracking-[0.04em] bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
             <Clock className="w-3 h-3" /> Nakabinbin
           </span>
         );
       case "in_review":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-semibold tracking-[0.04em] bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-800">
             <Clock className="w-3 h-3" /> Sinusuri
           </span>
         );
       case "implemented":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-semibold tracking-[0.04em] bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
             <CheckCircle className="w-3 h-3" /> Naipatupad
           </span>
         );
       case "dismissed":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 border border-zinc-300 dark:border-zinc-700">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-semibold tracking-[0.04em] bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 border border-zinc-300 dark:border-zinc-700">
             <XCircle className="w-3 h-3" /> Tinanggihan
           </span>
         );
@@ -125,7 +125,7 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
       {/* KPI Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="p-4 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)]">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-muted)]">
+          <div className="text-xs font-mono uppercase tracking-[0.06em] text-[var(--color-text-muted)]">
             Kabuuang Mungkahi
           </div>
           <div className="font-serif text-2xl font-bold text-[var(--color-text)] mt-1">
@@ -134,7 +134,7 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
         </div>
 
         <div className="p-4 rounded-md border border-amber-300 dark:border-amber-900 bg-amber-50/50 dark:bg-amber-950/20">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-amber-800 dark:text-amber-400 font-semibold">
+          <div className="text-xs font-mono uppercase tracking-[0.06em] text-amber-800 dark:text-amber-400 font-semibold">
             Nakabinbin
           </div>
           <div className="font-serif text-2xl font-bold text-amber-900 dark:text-amber-200 mt-1">
@@ -143,7 +143,7 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
         </div>
 
         <div className="p-4 rounded-md border border-blue-300 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/20">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-blue-800 dark:text-blue-400 font-semibold">
+          <div className="text-xs font-mono uppercase tracking-[0.06em] text-blue-800 dark:text-blue-400 font-semibold">
             Sinusuri
           </div>
           <div className="font-serif text-2xl font-bold text-blue-900 dark:text-blue-200 mt-1">
@@ -152,7 +152,7 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
         </div>
 
         <div className="p-4 rounded-md border border-emerald-300 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/20">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-emerald-800 dark:text-emerald-400 font-semibold">
+          <div className="text-xs font-mono uppercase tracking-[0.06em] text-emerald-800 dark:text-emerald-400 font-semibold">
             Naipatupad
           </div>
           <div className="font-serif text-2xl font-bold text-emerald-900 dark:text-emerald-200 mt-1">
@@ -240,7 +240,7 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
                     {getStatusBadge(item.status)}
-                    <span className="text-[11px] font-mono text-[var(--color-text-muted)] flex items-center gap-1">
+                    <span className="text-xs font-mono text-[var(--color-text-muted)] flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {new Date(item.created_at).toLocaleDateString("fil-PH", {
                         year: "numeric",
@@ -289,7 +289,7 @@ export function SuggestionsBoard({ initialSuggestions }: SuggestionsBoardProps) 
               {/* Rationale / Sources if provided */}
               {item.rationale && (
                 <div className="p-3 rounded bg-[var(--color-page)] border border-[var(--color-border)] text-xs space-y-1">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-semibold block">
+                  <span className="font-mono text-xs uppercase tracking-[0.06em] text-[var(--color-text-muted)] font-semibold block">
                     Iminungkahing Sanggunian o Batayan:
                   </span>
                   <p className="text-[var(--color-text)] font-sans italic">

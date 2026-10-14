@@ -73,7 +73,7 @@ export function Header({ onOpenDrawer }: HeaderProps) {
                 aria-label="Maghanap ng mga paksa"
               />
               <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
-                <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-medium text-text-muted bg-surface border border-border rounded">
+                <kbd className="px-1.5 py-0.5 text-xs font-mono font-medium tracking-[0.06em] text-text-muted bg-surface border border-border rounded">
                   ⌘K
                 </kbd>
               </div>
@@ -95,10 +95,10 @@ export function Header({ onOpenDrawer }: HeaderProps) {
             <ThemeToggle />
 
             <Link
-              href="/login"
+              href="/admin/login"
               className="inline-flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-              aria-label="Mag-login"
-              title="Mag-login"
+              aria-label="Admin Login"
+              title="Admin Login"
             >
               <User className="w-5 h-5" />
             </Link>
