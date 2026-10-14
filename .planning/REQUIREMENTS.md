@@ -53,18 +53,17 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 ### Admin Authentication & Security
 
-- [ ] **AUTH-01**: Admin can log in at `/admin/login` using email and password
-- [ ] **AUTH-02**: Session persists via Supabase Auth and protected admin routes enforce authentication middleware
+- [x] **AUTH-01**: Admin can log in at `/admin/login` using email and password
+- [x] **AUTH-02**: Session persists via Supabase Auth and protected admin routes enforce authentication middleware
 - [x] **AUTH-03**: Database enforces Row Level Security (RLS) restricting all mutations to verified `is_admin()` profiles
-
-- [ ] **AUTH-04**: Admin can log out securely from any admin screen
+- [x] **AUTH-04**: Admin can log out securely from any admin screen
 
 ### Admin Content Management (CMS)
 
-- [ ] **CMS-01**: Admin can view, edit, and reorder all 7 thematic topics
-- [ ] **CMS-02**: Admin can create, edit, publish/unpublish, and delete subtopic articles with live Markdown preview
-- [ ] **CMS-03**: Admin can add, edit, reorder, and delete citation sources linked to any subtopic
-- [ ] **CMS-04**: Admin can upload topic cover images and banners to Supabase Storage with automatic URL association
+- [x] **CMS-01**: Admin can view, edit, and reorder all 7 thematic topics
+- [x] **CMS-02**: Admin can create, edit, publish/unpublish, and delete subtopic articles with live Markdown preview
+- [x] **CMS-03**: Admin can add, edit, reorder, and delete citation sources linked to any subtopic
+- [x] **CMS-04**: Admin can upload topic cover images and banners to Supabase Storage with automatic URL association
 
 ### Admin Triage & Analytics
 

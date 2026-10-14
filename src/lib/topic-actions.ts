@@ -30,8 +30,7 @@ export async function updateTopic(
 
   try {
     const supabase = await createClient();
-    const { error } = await supabase
-      .from("topics")
+    const { error } = await (supabase.from("topics") as any)
       .update({
         name_fil: nameFil,
         name_en: nameEn,
@@ -69,8 +68,7 @@ export async function toggleTopicPublish(
 ): Promise<TopicActionResult> {
   try {
     const supabase = await createClient();
-    const { error } = await supabase
-      .from("topics")
+    const { error } = await (supabase.from("topics") as any)
       .update({
         is_published: isPublished,
         updated_at: new Date().toISOString(),

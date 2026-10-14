@@ -90,11 +90,11 @@ Plans:
 
 Plans:
 - Wave 1:
-  - [ ] 04-01: Admin Authentication, Session Middleware & Protected Admin Shell
-  - [ ] 04-02: Thematic Topics Management & Asset Storage Upload
+  - [x] 04-01: Admin Authentication, Session Middleware & Protected Admin Shell
+  - [x] 04-02: Thematic Topics Management & Asset Storage Upload
 - Wave 2 (depends on 04-01, 04-02):
-  - [ ] 04-03: Subtopic Article Management & Split-Screen Live Markdown Editor
-  - [ ] 04-04: Citations Management & Academic Evidentiary Curation
+  - [x] 04-03: Subtopic Article Management & Split-Screen Live Markdown Editor
+  - [x] 04-04: Citations Management & Academic Evidentiary Curation
 
 ### Phase 5: Full-Text Search, Feedback & Suggestion Box
 **Goal**: Implement PostgreSQL tsvector full-text search across topics and subtopics, an in-article reader feedback widget, a public topic suggestion submission form, and admin triage dashboards.  

@@ -45,7 +45,8 @@ export async function loginAdmin(
       .eq("id", data.user.id)
       .single();
 
-    if (profileError || !profile || profile.role !== "admin") {
+    const p = profile as any;
+    if (profileError || !p || p.role !== "admin") {
       // Invalidate session if not an admin
       await supabase.auth.signOut();
       return {

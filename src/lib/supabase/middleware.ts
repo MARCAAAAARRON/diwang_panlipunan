@@ -80,7 +80,8 @@ export async function updateSession(request: NextRequest) {
       .eq("id", user.id)
       .single();
 
-    if (!profile || profile.role !== "admin") {
+    const p = profile as any;
+    if (!p || p.role !== "admin") {
       const url = request.nextUrl.clone();
       url.pathname = "/admin/login";
       url.searchParams.set("error", "unauthorized");
@@ -101,7 +102,8 @@ export async function updateSession(request: NextRequest) {
         .eq("id", user.id)
         .single();
 
-      if (profile && profile.role === "admin") {
+      const p = profile as any;
+      if (p && p.role === "admin") {
         const nextPath = request.nextUrl.searchParams.get("next") || "/admin";
         const url = request.nextUrl.clone();
         url.pathname = nextPath;
