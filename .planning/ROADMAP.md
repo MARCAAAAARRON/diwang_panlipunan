@@ -11,7 +11,7 @@ Diwang Panlipunan is built through a vertical MVP delivery model spanning 6 focu
 - [x] **Phase 3: Core Discovery & Subtopic Reading Experience** — 7 thematic topic hubs, Markdown article reader, topic banner accents, and citations
 - [x] **Phase 4: Admin Authentication & Content Management System** — Secure admin auth, topic/subtopic Markdown CMS, citations manager, and media upload
 - [x] **Phase 5: Full-Text Search, Feedback & Suggestion Box** — PostgreSQL tsvector search, reader feedback ("Oo/Hindi"), suggestion form, and admin triage
-- [ ] **Phase 6: Reading Tools, Social Sharing, Polish & Analytics** — Reading progress, print/PDF layout, deep links with OG meta, related topics, and admin metrics
+- [x] **Phase 6: Reading Tools, Social Sharing, Polish & Analytics** — Reading progress, print/PDF layout, deep links with OG meta, related topics, and admin metrics
 
 ## Phase Details
 
@@ -129,10 +129,10 @@ Plans:
 
 Plans:
 - Wave 1:
-  - [ ] 06-01: Reading Depth Indicator & Broadsheet Print/PDF Layout
-  - [ ] 06-02: Related Subtopics Recommendation Engine & Social Sharing
+  - [x] 06-01: Reading Depth Indicator & Broadsheet Print/PDF Layout
+  - [x] 06-02: Related Subtopics Recommendation Engine & Social Sharing
 - Wave 2 (depends on 06-01, 06-02):
-  - [ ] 06-03: Internal Platform Analytics Dashboard
+  - [x] 06-03: Internal Platform Analytics Dashboard
 
 ## Progress
 
@@ -146,4 +146,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Core Discovery & Subtopic Reading Experience | 3/3 | Complete | 2026-10-14 |
 | 4. Admin Authentication & Content Management System | 4/4 | Complete | 2026-10-14 |
 | 5. Full-Text Search, Feedback & Suggestion Box | 3/3 | Complete | 2026-10-14 |
-| 6. Reading Tools, Social Sharing, Polish & Analytics | 0/3 | Planned | - |
+| 6. Reading Tools, Social Sharing, Polish & Analytics | 3/3 | Complete | 2026-10-14 |

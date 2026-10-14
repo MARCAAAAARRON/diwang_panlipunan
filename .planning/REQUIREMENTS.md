@@ -13,9 +13,9 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 - [x] **DISC-02**: User can view subtopic count and publication status for each topic
 - [x] **READ-01**: User can read subtopic article with title, executive summary, reading time estimate, and formatted Markdown content
 - [x] **READ-02**: User sees topic-specific accent colorway applied to article headers and banners
-- [ ] **READ-03**: User can view a reading depth / progress indicator while scrolling through an article
-- [ ] **READ-04**: User can print or export article to PDF with clean layout stripping web navigation chrome
-- [ ] **READ-05**: User can view curated related subtopics at the footer of each article
+- [x] **READ-03**: User can view a reading depth / progress indicator while scrolling through an article
+- [x] **READ-04**: User can print or export article to PDF with clean layout stripping web navigation chrome
+- [x] **READ-05**: User can view curated related subtopics at the footer of each article
 
 ### Sources & Academic Rigor
 
@@ -29,7 +29,7 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 - [x] **NAV-02**: Content Drawer displays all 7 topics, expandable subtopic directories, and static page links
 - [x] **NAV-03**: Active page is visually highlighted in the header and Content Drawer
 - [x] **NAV-04**: User can switch between Light and Dark themes, with choice persisted in localStorage and system preference fallback
-- [ ] **NAV-05**: User can copy shareable article deep links with clipboard confirmation toast and rich Open Graph preview tags
+- [x] **NAV-05**: User can copy shareable article deep links with clipboard confirmation toast and rich Open Graph preview tags
 
 ### Static Informational Pages
 
@@ -69,7 +69,7 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 - [x] **TRG-01**: Admin can view feedback submissions aggregated by subtopic, including satisfaction percentages and reader comments
 - [x] **TRG-02**: Admin can triage topic suggestions with status updates (Pending, In Review, Implemented, Dismissed)
-- [ ] **ANLY-01**: Admin can view internal platform analytics including article page views, feedback totals, and frequent search terms
+- [x] **ANLY-01**: Admin can view internal platform analytics including article page views, feedback totals, and frequent search terms
 
 ---
 
@@ -112,9 +112,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 | DISC-02 | Phase 3 | Complete |
 | READ-01 | Phase 3 | Complete |
 | READ-02 | Phase 3 | Complete |
-| READ-03 | Phase 6 | Pending |
-| READ-04 | Phase 6 | Pending |
-| READ-05 | Phase 6 | Pending |
+| READ-03 | Phase 6 | Complete |
+| READ-04 | Phase 6 | Complete |
+| READ-05 | Phase 6 | Complete |
 | SRC-01 | Phase 3 | Complete |
 | SRC-02 | Phase 3 | Complete |
 | SRC-03 | Phase 3 | Complete |
@@ -122,7 +122,7 @@ Which phases cover which requirements. Populated during roadmap creation.
 | NAV-02 | Phase 2 | Complete |
 | NAV-03 | Phase 2 | Complete |
 | NAV-04 | Phase 2 | Complete |
-| NAV-05 | Phase 6 | Pending |
+| NAV-05 | Phase 6 | Complete |
 | PAGE-01 | Phase 2 | Complete |
 | PAGE-02 | Phase 2 | Complete |
 | PAGE-03 | Phase 2 | Complete |
@@ -144,7 +144,7 @@ Which phases cover which requirements. Populated during roadmap creation.
 | CMS-04 | Phase 4 | Complete |
 | TRG-01 | Phase 5 | Complete |
 | TRG-02 | Phase 5 | Complete |
-| ANLY-01 | Phase 6 | Pending |
+| ANLY-01 | Phase 6 | Complete |
 
 **Coverage:**
 - v1 requirements: 35 total
