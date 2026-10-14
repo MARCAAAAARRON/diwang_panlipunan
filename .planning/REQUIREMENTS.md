@@ -55,7 +55,8 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 - [ ] **AUTH-01**: Admin can log in at `/admin/login` using email and password
 - [ ] **AUTH-02**: Session persists via Supabase Auth and protected admin routes enforce authentication middleware
-- [ ] **AUTH-03**: Database enforces Row Level Security (RLS) restricting all mutations to verified `is_admin()` profiles
+- [x] **AUTH-03**: Database enforces Row Level Security (RLS) restricting all mutations to verified `is_admin()` profiles
+
 - [ ] **AUTH-04**: Admin can log out securely from any admin screen
 
 ### Admin Content Management (CMS)
@@ -136,7 +137,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | SUGG-02 | Phase 5 | Pending |
 | AUTH-01 | Phase 4 | Pending |
 | AUTH-02 | Phase 4 | Pending |
-| AUTH-03 | Phase 1 | Pending |
+| AUTH-03 | Phase 1 | Complete |
+
 | AUTH-04 | Phase 4 | Pending |
 | CMS-01 | Phase 4 | Pending |
 | CMS-02 | Phase 4 | Pending |
