@@ -128,9 +128,11 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: Implement reading progress indicator and print/PDF-optimized stylesheets
-- [ ] 06-02: Implement shareable deep links with copy toast, Open Graph metadata, and related subtopic recommendations
-- [ ] 06-03: Build admin internal analytics dashboard with page view counters and feedback metrics
+- Wave 1:
+  - [ ] 06-01: Reading Depth Indicator & Broadsheet Print/PDF Layout
+  - [ ] 06-02: Related Subtopics Recommendation Engine & Social Sharing
+- Wave 2 (depends on 06-01, 06-02):
+  - [ ] 06-03: Internal Platform Analytics Dashboard
 
 ## Progress
 
@@ -141,8 +143,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Project Foundation & Database Architecture | 2/2 | Complete | 2026-10-14 |
 | 2. Global Shell, Navigation & Static Pages | 3/3 | Complete | 2026-10-14 |
-
-| 3. Core Discovery & Subtopic Reading Experience | 0/3 | Not started | - |
-| 4. Admin Authentication & Content Management System | 0/4 | Not started | - |
-| 5. Full-Text Search, Feedback & Suggestion Box | 0/3 | Not started | - |
-| 6. Reading Tools, Social Sharing, Polish & Analytics | 0/3 | Not started | - |
+| 3. Core Discovery & Subtopic Reading Experience | 3/3 | Complete | 2026-10-14 |
+| 4. Admin Authentication & Content Management System | 4/4 | Complete | 2026-10-14 |
+| 5. Full-Text Search, Feedback & Suggestion Box | 3/3 | Complete | 2026-10-14 |
+| 6. Reading Tools, Social Sharing, Polish & Analytics | 0/3 | Planned | - |
