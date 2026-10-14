@@ -1,6 +1,7 @@
 import React from "react";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Clock, Calendar, CheckCircle, Image as ImageIcon } from "lucide-react";
+import { ArticleActions } from "./article-actions";
 
 interface ArticleHeaderProps {
   topicTitle: string;
@@ -66,26 +67,30 @@ export function ArticleHeader({
         {subtopicTitle}
       </h1>
 
-      {/* Editorial Metadata Bar */}
-      <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-2 pb-4 border-b border-[var(--color-border)] text-xs text-[var(--color-text-muted)] font-mono">
-        <div className="flex items-center gap-1.5">
-          <Clock className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
-          <span>{readTimeMinutes} minutong pagbasa</span>
+      {/* Editorial Metadata Bar & Article Actions */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 pb-4 border-b border-[var(--color-border)] text-xs text-[var(--color-text-muted)] font-mono">
+        <div className="flex flex-wrap items-center gap-y-2 gap-x-4">
+          <div className="flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+            <span>{readTimeMinutes} minutong pagbasa</span>
+          </div>
+
+          <span className="text-[var(--color-border)]">•</span>
+
+          <div className="flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+            <span className="capitalize">{formattedDate}</span>
+          </div>
+
+          <span className="text-[var(--color-border)]">•</span>
+
+          <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300 font-sans font-medium">
+            <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+            <span>Nasuri ng Lupon ng mga Mananaliksik</span>
+          </div>
         </div>
 
-        <span className="text-[var(--color-border)]">•</span>
-
-        <div className="flex items-center gap-1.5">
-          <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
-          <span className="capitalize">{formattedDate}</span>
-        </div>
-
-        <span className="text-[var(--color-border)]">•</span>
-
-        <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300 font-sans font-medium">
-          <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
-          <span>Nasuri ng Lupon ng mga Mananaliksik</span>
-        </div>
+        <ArticleActions title={subtopicTitle} />
       </div>
 
       {/* Editorial Featured Photo Container */}

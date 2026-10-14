@@ -623,3 +623,69 @@ export async function getAdjacentSubtopics(
 
   return { prev, next };
 }
+
+export interface RelatedSubtopicItem {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  readTimeMinutes: number;
+  topicSlug: string;
+  topicTitle: string;
+  topicColorToken: string;
+  isSibling: boolean;
+}
+
+/**
+ * Retrieve curated related subtopics: 2 siblings + 1 cross-thematic intersection
+ */
+export async function getRelatedSubtopics(
+  topicSlug: string,
+  subtopicSlug: string
+): Promise<RelatedSubtopicItem[]> {
+  const allTopics = await getAllTopics();
+  const currentTopic = allTopics.find((t) => t.slug === topicSlug);
+
+  const related: RelatedSubtopicItem[] = [];
+
+  // 1. Pick up to 2 sibling subtopics from current topic
+  if (currentTopic) {
+    const siblings = currentTopic.subtopics.filter((s) => s.slug !== subtopicSlug);
+    for (const sib of siblings.slice(0, 2)) {
+      related.push({
+        id: sib.id,
+        slug: sib.slug,
+        title: sib.title,
+        summary: sib.summary || "",
+        readTimeMinutes: sib.read_time_minutes || 5,
+        topicSlug: currentTopic.slug,
+        topicTitle: currentTopic.name_fil,
+        topicColorToken: currentTopic.color_token,
+        isSibling: true,
+      });
+    }
+  }
+
+  // 2. Pick 1 (or fill up to 3) cross-thematic subtopics from other topics
+  const otherTopics = allTopics.filter((t) => t.slug !== topicSlug);
+  for (const otherTopic of otherTopics) {
+    if (related.length >= 3) break;
+    const candidate = otherTopic.subtopics[0];
+    if (candidate) {
+      related.push({
+        id: candidate.id,
+        slug: candidate.slug,
+        title: candidate.title,
+        summary: candidate.summary || "",
+        readTimeMinutes: candidate.read_time_minutes || 5,
+        topicSlug: otherTopic.slug,
+        topicTitle: otherTopic.name_fil,
+        topicColorToken: otherTopic.color_token,
+        isSibling: false,
+      });
+    }
+  }
+
+  return related.slice(0, 3);
+}
+

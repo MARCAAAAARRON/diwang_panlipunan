@@ -1,13 +1,19 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getSubtopicBySlug, getAdjacentSubtopics } from "@/lib/content-service";
+import {
+  getSubtopicBySlug,
+  getAdjacentSubtopics,
+  getRelatedSubtopics,
+} from "@/lib/content-service";
 import { ArticleHeader } from "@/components/reading/article-header";
 import { MarkdownRenderer } from "@/components/reading/markdown-renderer";
 import { ReadingSidebar } from "@/components/reading/reading-sidebar";
 import { CitationsList } from "@/components/reading/citations-list";
 import { ReadingFeedback } from "@/components/reading/reading-feedback";
 import { ArticlePagination } from "@/components/reading/article-pagination";
+import { ReadingProgressBar } from "@/components/reading/reading-progress-bar";
+import { RelatedSubtopics } from "@/components/reading/related-subtopics";
 
 interface SubtopicPageProps {
   params: {
@@ -26,9 +32,26 @@ export async function generateMetadata({
     };
   }
 
+  const cleanDescription = article.summary || "Pagsusuri at aralin sa Diwang Panlipunan.";
+  const title = `${article.title} | Diwang Panlipunan`;
+
   return {
-    title: `${article.title} | Diwang Panlipunan`,
-    description: article.summary,
+    title,
+    description: cleanDescription,
+    openGraph: {
+      title,
+      description: cleanDescription,
+      type: "article",
+      locale: "fil_PH",
+      siteName: "Diwang Panlipunan",
+      publishedTime: article.published_at || undefined,
+      authors: ["Lupon ng Patnugutan, Diwang Panlipunan"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: cleanDescription,
+    },
   };
 }
 
@@ -39,9 +62,10 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
     notFound();
   }
 
-  const [article, adjacent] = await Promise.all([
+  const [article, adjacent, related] = await Promise.all([
     getSubtopicBySlug(params.topic, params.subtopic),
     getAdjacentSubtopics(params.topic, params.subtopic),
+    getRelatedSubtopics(params.topic, params.subtopic),
   ]);
 
   if (!article) {
@@ -59,6 +83,9 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
       }}
       className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
     >
+      {/* 2.5px Minimalist Reading Depth Progress Bar */}
+      <ReadingProgressBar colorToken={topic?.color_token} />
+
       <div className="xl:grid xl:grid-cols-12 xl:gap-12 items-start">
         {/* Left Sticky Editorial Sidebar (Desktop 1280px+) */}
         <div className="hidden xl:block xl:col-span-3">
@@ -84,6 +111,9 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
 
           {/* Academic Citations & Bibliography */}
           <CitationsList sources={article.sources} />
+
+          {/* Intersectional & Sibling Related Subtopics */}
+          <RelatedSubtopics related={related} />
 
           {/* In-Page Reader Feedback & Contribution Prompt */}
           <ReadingFeedback

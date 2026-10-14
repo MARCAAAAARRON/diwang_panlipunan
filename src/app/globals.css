@@ -97,3 +97,79 @@ body {
   animation: citationFlash 2s ease-out;
   border-radius: 4px;
 }
+
+/* Broadsheet Editorial Print Stylesheet */
+@media print {
+  /* Hide interactive, navigation, and web-only chrome */
+  header,
+  footer,
+  nav,
+  aside,
+  #feedback,
+  #search-modal,
+  .no-print,
+  button,
+  input,
+  .article-pagination,
+  .reading-progress-bar {
+    display: none !important;
+  }
+
+  /* Reset document for high-contrast broadsheet paper printing */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Expand full width for paper */
+  main,
+  .reading-column,
+  article {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Ensure headings break cleanly */
+  h1, h2, h3, h4 {
+    color: #000000 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Avoid breaking inside quotes, stat boxes, and citations */
+  blockquote,
+  figure,
+  .stat-box,
+  .data-callout,
+  .citation-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border-color: #000000 !important;
+  }
+
+  blockquote {
+    border-left: 3pt solid #000000 !important;
+    padding-left: 12pt !important;
+    font-style: italic !important;
+  }
+
+  /* Force links to display cleanly without underlines or blue coloring */
+  a {
+    color: #000000 !important;
+    text-decoration: none !important;
+  }
+
+  /* Print URL footnote for academic citations */
+  #sanggunian a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #333333;
+    font-family: monospace;
+  }
+}
+
