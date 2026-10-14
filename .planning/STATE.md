@@ -11,8 +11,8 @@ See: .planning/PROJECT.md (updated 2026-10-14)
 
 Phase: 3 of 6 (Core Discovery & Subtopic Reading Experience)  
 Plan: 0 of 3 in current phase  
-Status: Ready to plan  
-Last activity: 2026-10-14 — Phase 3 context gathered and decisions confirmed  
+Status: Planned  
+Last activity: 2026-10-14 — Phase 3 planned (3 plans across 2 waves)  
 
 Progress: [████░░░░░░] 28%
 

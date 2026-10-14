@@ -68,9 +68,11 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Build Topics browse page and individual topic directory views with publication status filters
-- [ ] 03-02: Build subtopic article reader with Markdown rendering, executive summary, read time, and banner theming
-- [ ] 03-03: Implement citations component with external link safety and in-text citation smooth scrolling
+- Wave 1:
+  - [ ] 03-01: Build Topics browse page and individual topic directory views with publication status filters
+- Wave 2 (depends on 03-01):
+  - [ ] 03-02: Build subtopic article reader with Markdown rendering, executive summary, read time, and banner theming
+  - [ ] 03-03: Implement citations component with external link safety and in-text citation smooth scrolling
 
 ### Phase 4: Admin Authentication & Content Management System
 **Goal**: Implement secure email/password administrative authentication and a comprehensive CMS for managing topics, subtopics with live Markdown preview, citation sources, and cover image uploads.  
