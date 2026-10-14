@@ -25,18 +25,18 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 ### Navigation & Global Shell
 
-- [ ] **NAV-01**: User can open and close the Content Drawer navigation from any page via hamburger trigger
-- [ ] **NAV-02**: Content Drawer displays all 7 topics, expandable subtopic directories, and static page links
-- [ ] **NAV-03**: Active page is visually highlighted in the header and Content Drawer
-- [ ] **NAV-04**: User can switch between Light and Dark themes, with choice persisted in localStorage and system preference fallback
+- [x] **NAV-01**: User can open and close the Content Drawer navigation from any page via hamburger trigger
+- [x] **NAV-02**: Content Drawer displays all 7 topics, expandable subtopic directories, and static page links
+- [x] **NAV-03**: Active page is visually highlighted in the header and Content Drawer
+- [x] **NAV-04**: User can switch between Light and Dark themes, with choice persisted in localStorage and system preference fallback
 - [ ] **NAV-05**: User can copy shareable article deep links with clipboard confirmation toast and rich Open Graph preview tags
 
 ### Static Informational Pages
 
-- [ ] **PAGE-01**: User can view the Landing page implementing the exact editorial design, typography, and layout from `docs/screens/Landing.png`
-- [ ] **PAGE-02**: User can view Tungkol sa Amin (About) page detailing mission, educational rationale, and editorial guidelines
-- [ ] **PAGE-03**: User can view Makipag-ugnayan (Contact) page with institutional contact channels and inquiry guidelines
-- [ ] **PAGE-04**: User can view Patakaran sa Privacy (Privacy Notice) detailing anonymous usage, feedback, and suggestion data handling
+- [x] **PAGE-01**: User can view the Landing page implementing the exact editorial design, typography, and layout from `docs/screens/Landing.png`
+- [x] **PAGE-02**: User can view Tungkol sa Amin (About) page detailing mission, educational rationale, and editorial guidelines
+- [x] **PAGE-03**: User can view Makipag-ugnayan (Contact) page with institutional contact channels and inquiry guidelines
+- [x] **PAGE-04**: User can view Patakaran sa Privacy (Privacy Notice) detailing anonymous usage, feedback, and suggestion data handling
 
 ### Full-Text Search
 
