@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-10-14)
 
 **Core value:** Accessible, credible, and thought-provoking educational content on Philippine societal issues, presented with journalistic integrity, clear citations, and an editorial aesthetic that promotes active learning.  
-**Current focus:** Phase 4: Admin Authentication & Content Management System
+**Current focus:** Phase 5: Full-Text Search, Feedback & Suggestion Box
 
 ## Current Position
 
-Phase: 4 of 6 (Admin Authentication & Content Management System)  
-Plan: 4 of 4 in current phase  
-Status: Complete  
-Last activity: 2026-10-14 — Phase 4 executed: Admin auth, session middleware, topics & subtopics CMS, split-screen editor, citations manager, storage image uploader  
+Phase: 5 of 6 (Full-Text Search, Feedback & Suggestion Box)  
+Plan: 0 of 3 in current phase  
+Status: Planned  
+Last activity: 2026-10-14 — Phase 5 planned (3 plans across 2 waves)  
 
 Progress: [████████████░░░░░░] 67%
 

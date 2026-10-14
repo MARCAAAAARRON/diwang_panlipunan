@@ -109,9 +109,11 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: Build full-text search API route with PostgreSQL tsvector query and instant search results modal
-- [ ] 05-02: Implement reader feedback widget ("Nakatulong ba ito?") and public suggestion box with Zod validation
-- [ ] 05-03: Build admin triage views for feedback aggregation and suggestion management
+- Wave 1:
+  - [ ] 05-01: Full-Text Search Engine, Live Search Modal & Results Page
+  - [ ] 05-02: In-Article Reader Feedback & Public Topic Suggestion Box
+- Wave 2 (depends on 05-01, 05-02):
+  - [ ] 05-03: Admin Feedback Analytics & Topic Suggestion Triage Dashboards
 
 ### Phase 6: Reading Tools, Social Sharing, Polish & Analytics
 **Goal**: Enhance the reading experience with scroll depth indicators, print/PDF stylesheets, related subtopic recommendations, shareable deep links with Open Graph metadata, and internal platform analytics.  
