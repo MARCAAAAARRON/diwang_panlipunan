@@ -4,18 +4,20 @@ import React from "react";
 import Link from "next/link";
 import { Menu, Home, Search, User } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { useDrawer } from "./drawer-context";
 
 interface HeaderProps {
   onOpenDrawer?: () => void;
 }
 
 export function Header({ onOpenDrawer }: HeaderProps) {
+  const { openDrawer } = useDrawer();
+
   const handleHamburgerClick = () => {
     if (onOpenDrawer) {
       onOpenDrawer();
     } else {
-      // Dispatch custom window event so any listening Drawer component can open
-      window.dispatchEvent(new CustomEvent("open-content-drawer"));
+      openDrawer();
     }
   };
 

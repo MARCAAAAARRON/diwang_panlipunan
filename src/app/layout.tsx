@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Source_Serif_4, Public_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { DrawerProvider } from "@/components/navigation/drawer-context";
 import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/navigation/footer";
+import { ContentDrawer } from "@/components/navigation/content-drawer";
 
 const sourceSerif4 = Source_Serif_4({
   subsets: ["latin"],
@@ -52,11 +54,14 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen font-sans bg-page text-text antialiased flex flex-col transition-colors duration-150">
         <ThemeProvider>
-          <Header />
-          <div className="flex-1 flex flex-col">
-            {children}
-          </div>
-          <Footer />
+          <DrawerProvider>
+            <Header />
+            <ContentDrawer />
+            <div className="flex-1 flex flex-col">
+              {children}
+            </div>
+            <Footer />
+          </DrawerProvider>
         </ThemeProvider>
       </body>
     </html>
