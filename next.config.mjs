@@ -19,6 +19,14 @@ const nextConfig = {
         source: "/mga-paksa",
         destination: "/topics",
       },
+      {
+        source: "/maghanap",
+        destination: "/search",
+      },
+      {
+        source: "/suggest",
+        destination: "/magmungkahi",
+      },
     ];
   },
 };
