@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Source_Serif_4, Public_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Header } from "@/components/navigation/header";
+import { Footer } from "@/components/navigation/footer";
 
 const sourceSerif4 = Source_Serif_4({
   subsets: ["latin"],
@@ -21,15 +24,40 @@ export const metadata: Metadata = {
   description: "Pag-unawa sa Lipunan, Pagmulat sa Kinabukasan — Isang platapormang pang-edukasyon para sa kamalayang panlipunan.",
 };
 
+const zeroFOUCScript = `
+  (function() {
+    try {
+      var stored = localStorage.getItem('theme');
+      var isDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = isDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (e) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fil" className={`${sourceSerif4.variable} ${publicSans.variable}`}>
-      <body className="min-h-screen font-sans bg-page text-text antialiased">
-        {children}
+    <html lang="fil" suppressHydrationWarning className={`${sourceSerif4.variable} ${publicSans.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: zeroFOUCScript }} />
+      </head>
+      <body className="min-h-screen font-sans bg-page text-text antialiased flex flex-col transition-colors duration-150">
+        <ThemeProvider>
+          <Header />
+          <div className="flex-1 flex flex-col">
+            {children}
+          </div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
