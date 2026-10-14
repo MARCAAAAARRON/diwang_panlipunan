@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-10-14)
 Phase: 1 of 6 (Project Foundation & Database Architecture)  
 Plan: 0 of 2 in current phase  
 Status: Ready to plan  
-Last activity: 2026-10-14 — Project initialized  
+Last activity: 2026-10-14 — Phase 1 context gathered  
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -50,6 +50,7 @@ Recent decisions affecting current work:
 - [Init]: Tailwind CSS with CSS variables for light/dark editorial colorways and 7 topic accent themes.
 - [Init]: Supabase for PostgreSQL, Auth, and Storage with RLS and `is_admin()` security definer function.
 - [Init]: Build all P0, P1, and P2 user stories across 6 vertical MVP phases.
+- [Phase 1]: Use src/ directory, domain-driven components, @/* alias, versioned SQL migrations in supabase/migrations/, @supabase/ssr, seed all 7 canonical themes with sample subtopics.
 
 ### Pending Todos
 
@@ -70,5 +71,6 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-10-14  
-Stopped at: Completed project initialization via /gsd-new-project  
-Resume file: None
+Stopped at: Phase 1 context gathered  
+Resume file: .planning/phases/01-project-foundation-database-architecture/01-CONTEXT.md
+
