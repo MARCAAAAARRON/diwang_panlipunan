@@ -28,8 +28,11 @@ Diwang Panlipunan is built through a vertical MVP delivery model spanning 6 focu
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Initialize Next.js project, typography, design tokens, and Supabase client configuration
-- [ ] 01-02: Deploy Supabase database migration scripts, RLS policies, and database seed data
+- Wave 1:
+  - [ ] 01-01: Initialize Next.js project, typography, design tokens, and Supabase client configuration
+- Wave 2 *(blocked on Wave 1 completion)*:
+  - [ ] 01-02: Deploy Supabase database migration scripts, RLS policies, and database seed data
+
 
 ### Phase 2: Global Shell, Navigation & Static Pages
 **Goal**: Deliver the responsive editorial global shell, accessible slide-out Content Drawer, persistent dark/light theme switcher, and all static informational pages including the Landing page matching design mocks.  
