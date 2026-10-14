@@ -86,7 +86,11 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
           <CitationsList sources={article.sources} />
 
           {/* In-Page Reader Feedback & Contribution Prompt */}
-          <ReadingFeedback subtopicTitle={article.title} />
+          <ReadingFeedback
+            subtopicTitle={article.title}
+            subtopicId={article.id}
+            subtopicSlug={article.slug}
+          />
 
           {/* Adjacent Subtopic Curriculum Pagination */}
           <ArticlePagination
