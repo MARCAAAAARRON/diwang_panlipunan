@@ -110,7 +110,7 @@ export function ArticleHeader({
             <strong className="font-semibold text-[var(--color-primary)]">Larawan:</strong>{" "}
             {defaultCaption}
           </p>
-          <p className="font-mono text-[11px] text-[var(--color-text-muted)]">
+          <p className="font-mono text-xs text-[var(--color-text-muted)]">
             {defaultCredit}
           </p>
         </figcaption>

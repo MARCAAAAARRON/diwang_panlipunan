@@ -104,16 +104,16 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
                     <span>Tala ng Datos • Antas ng Banta</span>
                   </div>
 
-                  <div className="pt-1 text-[var(--color-text)] text-[16px] leading-relaxed">
+                  <div className="pt-1 text-[var(--color-text)] text-[17px] leading-[1.7]">
                     {processCitations(children)}
                   </div>
                 </aside>
               );
             }
 
-            // Broadsheet Editorial Pullquote
+            // Broadsheet Editorial Pullquote (Strict 3px solid border per DESIGN.md)
             return (
-              <blockquote className="my-8 p-5 sm:p-6 bg-[var(--color-surface)] border-l-4 border-[var(--color-primary-large)] rounded-r-md text-[var(--color-text)] font-serif italic text-lg sm:text-xl leading-relaxed">
+              <blockquote className="my-8 p-5 sm:p-6 bg-[var(--color-surface)] border-l-[3px] border-[var(--color-primary-large)] rounded-r-md text-[var(--color-text)] font-serif italic text-lg sm:text-xl leading-relaxed">
                 {processCitations(children)}
               </blockquote>
             );

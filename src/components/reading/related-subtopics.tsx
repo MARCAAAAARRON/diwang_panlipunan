@@ -35,7 +35,7 @@ export function RelatedSubtopics({ related }: RelatedSubtopicsProps) {
             className="group flex flex-col justify-between p-4 sm:p-5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-primary)] transition-all"
           >
             <div className="space-y-2.5">
-              <div className="flex items-center justify-between text-[11px] font-mono">
+              <div className="flex items-center justify-between text-xs font-mono">
                 <span className="px-2 py-0.5 rounded font-semibold bg-[var(--color-highlight)] text-[var(--color-text)] border border-[var(--color-border)]">
                   {item.topicTitle}
                 </span>

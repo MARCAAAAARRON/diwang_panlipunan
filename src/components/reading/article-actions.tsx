@@ -102,7 +102,7 @@ export function ArticleActions({ title }: ArticleActionsProps) {
               onClick={() => setShowShareMenu(false)}
             />
             <div className="absolute right-0 mt-2 w-56 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl z-50 p-2 space-y-1 text-xs animate-in fade-in-50">
-              <div className="flex items-center justify-between px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] mb-1">
+              <div className="flex items-center justify-between px-2 py-1 text-xs font-mono uppercase tracking-[0.06em] text-[var(--color-text-muted)] border-b border-[var(--color-border)] mb-1">
                 <span>Ibahagi ang Aralin</span>
                 <button
                   type="button"
@@ -127,7 +127,7 @@ export function ArticleActions({ title }: ArticleActionsProps) {
                   )}
                   <span>{copied ? "Nakopya na!" : "Kopyahin ang Link"}</span>
                 </span>
-                <kbd className="text-[10px] font-mono text-[var(--color-text-muted)]">URL</kbd>
+                <kbd className="text-xs font-mono text-[var(--color-text-muted)]">URL</kbd>
               </button>
 
               {/* Facebook Share */}

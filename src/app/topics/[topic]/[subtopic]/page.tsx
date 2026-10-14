@@ -14,6 +14,7 @@ import { ReadingFeedback } from "@/components/reading/reading-feedback";
 import { ArticlePagination } from "@/components/reading/article-pagination";
 import { ReadingProgressBar } from "@/components/reading/reading-progress-bar";
 import { RelatedSubtopics } from "@/components/reading/related-subtopics";
+import { BackToTop } from "@/components/reading/back-to-top";
 import { recordArticleView } from "@/lib/analytics-service";
 
 interface SubtopicPageProps {
@@ -134,6 +135,9 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
           />
         </main>
       </div>
+
+      {/* Floating Broadsheet Back To Top Control */}
+      <BackToTop />
     </div>
   );
 }

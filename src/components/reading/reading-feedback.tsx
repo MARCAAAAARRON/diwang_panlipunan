@@ -165,7 +165,7 @@ export function ReadingFeedback({
             className="w-full p-3 text-xs rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
           />
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono text-[var(--color-text-muted)]">
+            <span className="text-xs font-mono text-[var(--color-text-muted)]">
               {500 - commentText.length} titik ang natitira
             </span>
             <div className="flex items-center gap-2">
