@@ -89,10 +89,12 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 04-01: Implement admin login screen, Supabase session auth, protected route middleware, and logout
-- [ ] 04-02: Build admin topic management dashboard and edit interfaces
-- [ ] 04-03: Build admin subtopic CRUD editor with live Markdown preview and publication status toggles
-- [ ] 04-04: Build citation manager and Supabase Storage image upload integration for banners
+- Wave 1:
+  - [ ] 04-01: Admin Authentication, Session Middleware & Protected Admin Shell
+  - [ ] 04-02: Thematic Topics Management & Asset Storage Upload
+- Wave 2 (depends on 04-01, 04-02):
+  - [ ] 04-03: Subtopic Article Management & Split-Screen Live Markdown Editor
+  - [ ] 04-04: Citations Management & Academic Evidentiary Curation
 
 ### Phase 5: Full-Text Search, Feedback & Suggestion Box
 **Goal**: Implement PostgreSQL tsvector full-text search across topics and subtopics, an in-article reader feedback widget, a public topic suggestion submission form, and admin triage dashboards.  
