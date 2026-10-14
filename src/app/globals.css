@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Page background & surfaces */
+  --color-bg: #FBF6E9;
+  --color-surface: #FFFFFF;
+  --color-border: #E3F0AF;
+  --color-input-border: #6E7A6F;
+
+  /* Typography */
+  --color-text: #14231B;
+  --color-text-muted: #4A5D52;
+
+  /* Brand / Primary */
+  --color-primary: #0D6E3F;
+  --color-primary-hover: #0A5A33;
+  --color-primary-large: #118B50;
+
+  /* Accents & States */
+  --color-accent: #5DB996;
+  --color-highlight: #E3F0AF;
+  --color-link: #0D6E3F;
+  --color-error: #BA1A1A;
+
+  /* Default topic color */
+  --topic-color: #0D6E3F;
+
+  /* 7 Topic Accent Colors */
+  --topic-edukasyon: #1E40AF;
+  --topic-kalusugan: #065F46;
+  --topic-ekonomiya: #92400E;
+  --topic-karapatan: #991B1B;
+  --topic-kapaligiran: #166534;
+  --topic-teknolohiya: #3730A3;
+  --topic-pamahalaan: #1E293B;
+}
+
+[data-theme="dark"],
+.dark {
+  /* Page background & surfaces */
+  --color-bg: #092328;
+  --color-surface: #12544F;
+  --color-border: rgba(42, 131, 95, 0.35);
+  --color-input-border: #8BBB92;
+
+  /* Typography */
+  --color-text: #EAF3EC;
+  --color-text-muted: #C5D9CA;
+
+  /* Brand / Primary */
+  --color-primary: #2A835F;
+  --color-primary-hover: #226B4D;
+  --color-primary-large: #2A835F;
+
+  /* Accents & States */
+  --color-accent: #8BBB92;
+  --color-highlight: rgba(42, 131, 95, 0.35);
+  --color-link: #A9D4B0;
+  --color-error: #F2B8B5;
+
+  /* Default topic color */
+  --topic-color: #2A835F;
+}
+
+/* Base resets & typography */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-public-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Strict BroadSheet Editorial Aesthetic: No drop shadows */
+* {
+  box-shadow: none !important;
+}
+
+/* Maximum readability column for articles */
+.reading-column {
+  max-width: 68ch;
+  line-height: 1.7;
+}
