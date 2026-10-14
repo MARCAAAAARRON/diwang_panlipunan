@@ -14,6 +14,7 @@ import { ReadingFeedback } from "@/components/reading/reading-feedback";
 import { ArticlePagination } from "@/components/reading/article-pagination";
 import { ReadingProgressBar } from "@/components/reading/reading-progress-bar";
 import { RelatedSubtopics } from "@/components/reading/related-subtopics";
+import { recordArticleView } from "@/lib/analytics-service";
 
 interface SubtopicPageProps {
   params: {
@@ -71,6 +72,9 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
   if (!article) {
     notFound();
   }
+
+  // Non-blocking first-party page view analytics recording
+  recordArticleView(params.subtopic).catch(() => {});
 
   const topic = article.topic;
   const topicTitle = topic?.name_fil || "Pangunahing Paksa";

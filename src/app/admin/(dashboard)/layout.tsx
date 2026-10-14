@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   MessageSquare,
   Lightbulb,
+  BarChart3,
 } from "lucide-react";
 
 export default async function AdminDashboardLayout({
@@ -122,6 +123,14 @@ export default async function AdminDashboardLayout({
             >
               <Lightbulb className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
               <span>Mga Mungkahi</span>
+            </Link>
+
+            <Link
+              href="/admin/analytics"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+              <span>Analytics</span>
             </Link>
           </nav>
         </div>

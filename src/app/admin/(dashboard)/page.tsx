@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Clock,
   CheckCircle,
+  BarChart3,
 } from "lucide-react";
 
 export default async function AdminDashboardPage() {
@@ -118,6 +119,30 @@ export default async function AdminDashboardPage() {
         >
           <PlusCircle className="w-4 h-4" aria-hidden="true" />
           <span>Lumikha ng Aralin</span>
+        </Link>
+      </div>
+
+      {/* Analytics Summary Banner */}
+      <div className="p-6 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <div className="p-2.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-primary)] shrink-0">
+            <BarChart3 className="w-5 h-5" />
+          </div>
+          <div>
+            <h2 className="font-serif text-lg font-bold text-[var(--color-text)]">
+              Pagsusuri sa Plataporma at Pagbasa
+            </h2>
+            <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
+              Tingnan ang pinakabinabasang mga aralin, distribusyon sa 7 tema, at madalas hanaping paksa ng mamamayan.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/admin/analytics"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] text-xs font-mono uppercase tracking-wider font-semibold text-[var(--color-text)] transition-colors shrink-0 cursor-pointer"
+        >
+          <span>Buksan ang Analytics</span>
+          <ArrowRight className="w-4 h-4" aria-hidden="true" />
         </Link>
       </div>
 
