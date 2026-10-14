@@ -1,0 +1,135 @@
+# Roadmap: Diwang Panlipunan
+
+## Overview
+
+Diwang Panlipunan is built through a vertical MVP delivery model spanning 6 focused phases. We establish the Next.js App Router and Supabase database architecture with strict Row Level Security, craft the high-contrast broadsheet editorial global shell and static pages, deliver rich Markdown topic/subtopic reading with verified citations, implement secure administrative content management, integrate PostgreSQL full-text search with reader feedback and suggestions, and polish the platform with reading tools, print stylesheets, deep links, and analytics.
+
+## Phases
+
+- [ ] **Phase 1: Project Foundation & Database Architecture** — Workspace setup, design tokens, fonts, and Supabase database schema with RLS
+- [ ] **Phase 2: Global Shell, Navigation & Static Pages** — Content Drawer, dark/light theme switcher, and Landing, About, Contact, and Privacy pages
+- [ ] **Phase 3: Core Discovery & Subtopic Reading Experience** — 7 thematic topic hubs, Markdown article reader, topic banner accents, and citations
+- [ ] **Phase 4: Admin Authentication & Content Management System** — Secure admin auth, topic/subtopic Markdown CMS, citations manager, and media upload
+- [ ] **Phase 5: Full-Text Search, Feedback & Suggestion Box** — PostgreSQL tsvector search, reader feedback ("Oo/Hindi"), suggestion form, and admin triage
+- [ ] **Phase 6: Reading Tools, Social Sharing, Polish & Analytics** — Reading progress, print/PDF layout, deep links with OG meta, related topics, and admin metrics
+
+## Phase Details
+
+### Phase 1: Project Foundation & Database Architecture
+**Goal**: Establish the Next.js App Router workspace with TypeScript, Tailwind CSS, custom CSS variable theme tokens, Google Fonts (Source Serif 4 & Public Sans), and apply the Supabase PostgreSQL database schema with RLS and `is_admin()` security function.  
+**Mode**: mvp  
+**Depends on**: Nothing (greenfield foundation)  
+**Requirements**: AUTH-03  
+**Success Criteria** (what must be TRUE):
+  1. Next.js App Router project runs cleanly with TypeScript strict mode, Tailwind CSS, and CSS variable color tokens defined in DESIGN.md.
+  2. Source Serif 4 and Public Sans fonts are configured and rendered across the application.
+  3. Supabase client is initialized for server and client components with environment variable validation.
+  4. Complete database schema is deployed with tables (`profiles`, `topics`, `subtopics`, `sources`, `feedback`, `suggestions`), RLS enabled on every table, user profile trigger configured, and `is_admin()` function active.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01: Initialize Next.js project, typography, design tokens, and Supabase client configuration
+- [ ] 01-02: Deploy Supabase database migration scripts, RLS policies, and database seed data
+
+### Phase 2: Global Shell, Navigation & Static Pages
+**Goal**: Deliver the responsive editorial global shell, accessible slide-out Content Drawer, persistent dark/light theme switcher, and all static informational pages including the Landing page matching design mocks.  
+**Mode**: mvp  
+**Depends on**: Phase 1  
+**Requirements**: NAV-01, NAV-02, NAV-03, NAV-04, PAGE-01, PAGE-02, PAGE-03, PAGE-04  
+**Success Criteria** (what must be TRUE):
+  1. User can open and close the Content Drawer from any page via hamburger menu and see all 7 topics, subtopics, and static links with active page highlighting.
+  2. User can toggle between Light and Dark editorial color schemes, with state persisted in localStorage and system preferences respected.
+  3. Landing page faithfully renders the broadsheet layout, hero typography, featured issue cards, and callouts matching `docs/screens/Landing.png`.
+  4. Tungkol sa Amin (About), Makipag-ugnayan (Contact), and Patakaran sa Privacy (Privacy Notice) pages render clean editorial content.
+**Plans**: 3 plans
+
+Plans:
+- [ ] 02-01: Build global layout shell, header, footer, and theme provider with dark/light mode toggle
+- [ ] 02-02: Implement slide-out Content Drawer navigation with nested topic hierarchy and route detection
+- [ ] 02-03: Implement Landing page (`docs/screens/Landing.png`), About, Contact, and Privacy Notice pages
+
+### Phase 3: Core Discovery & Subtopic Reading Experience
+**Goal**: Enable readers to browse 7 major societal topics and read comprehensive Markdown subtopic articles styled with topic-specific banner accent colors and verified academic citations.  
+**Mode**: mvp  
+**Depends on**: Phase 2  
+**Requirements**: DISC-01, DISC-02, READ-01, READ-02, SRC-01, SRC-02, SRC-03  
+**Success Criteria** (what must be TRUE):
+  1. User can browse the 7 thematic topic cards showing Filipino descriptions, iconography, and counts of published subtopic articles.
+  2. User can open and read a subtopic article with title, executive summary, estimated reading time, and formatted Markdown content (headings, blockquotes, lists).
+  3. Article header displays the dynamic accent color corresponding to the active topic's theme token.
+  4. Citations section lists all references with authors, publication names, dates, and secure external links (`rel="noopener noreferrer"`), with smooth in-text citation jumps.
+**Plans**: 3 plans
+
+Plans:
+- [ ] 03-01: Build Topics browse page and individual topic directory views with publication status filters
+- [ ] 03-02: Build subtopic article reader with Markdown rendering, executive summary, read time, and banner theming
+- [ ] 03-03: Implement citations component with external link safety and in-text citation smooth scrolling
+
+### Phase 4: Admin Authentication & Content Management System
+**Goal**: Implement secure email/password administrative authentication and a comprehensive CMS for managing topics, subtopics with live Markdown preview, citation sources, and cover image uploads.  
+**Mode**: mvp  
+**Depends on**: Phase 3  
+**Requirements**: AUTH-01, AUTH-02, AUTH-04, CMS-01, CMS-02, CMS-03, CMS-04  
+**Success Criteria** (what must be TRUE):
+  1. Admin can log in at `/admin/login` and access protected routes; non-admin users or unauthenticated visitors are blocked by middleware.
+  2. Admin can view, edit, reorder, and manage metadata for all 7 topics.
+  3. Admin can create, edit, publish/unpublish, and delete subtopic articles with slug generation and real-time Markdown preview.
+  4. Admin can add, update, reorder, and remove citations attached to any subtopic.
+  5. Admin can upload topic cover images and banners to Supabase Storage with direct URL linking.
+  6. Admin can log out safely from any admin interface.
+**Plans**: 4 plans
+
+Plans:
+- [ ] 04-01: Implement admin login screen, Supabase session auth, protected route middleware, and logout
+- [ ] 04-02: Build admin topic management dashboard and edit interfaces
+- [ ] 04-03: Build admin subtopic CRUD editor with live Markdown preview and publication status toggles
+- [ ] 04-04: Build citation manager and Supabase Storage image upload integration for banners
+
+### Phase 5: Full-Text Search, Feedback & Suggestion Box
+**Goal**: Implement PostgreSQL tsvector full-text search across topics and subtopics, an in-article reader feedback widget, a public topic suggestion submission form, and admin triage dashboards.  
+**Mode**: mvp  
+**Depends on**: Phase 4  
+**Requirements**: SRCH-01, SRCH-02, SRCH-03, FDBK-01, FDBK-02, SUGG-01, SUGG-02, TRG-01, TRG-02  
+**Success Criteria** (what must be TRUE):
+  1. User can search keywords via the global search input and receive instantaneous results queried via PostgreSQL tsvector (`simple` config) with matching excerpts.
+  2. Reader can submit binary feedback ("Oo / Hindi nakatulong") and optional comments on subtopic articles, protected by client and server rate limits.
+  3. User can submit a social issue suggestion ("Magmungkahi ng Paksa") with Zod validation.
+  4. Admin can view aggregated feedback statistics and triage suggestions across statuses (Pending, In Review, Implemented, Dismissed).
+**Plans**: 3 plans
+
+Plans:
+- [ ] 05-01: Build full-text search API route with PostgreSQL tsvector query and instant search results modal
+- [ ] 05-02: Implement reader feedback widget ("Nakatulong ba ito?") and public suggestion box with Zod validation
+- [ ] 05-03: Build admin triage views for feedback aggregation and suggestion management
+
+### Phase 6: Reading Tools, Social Sharing, Polish & Analytics
+**Goal**: Enhance the reading experience with scroll depth indicators, print/PDF stylesheets, related subtopic recommendations, shareable deep links with Open Graph metadata, and internal platform analytics.  
+**Mode**: mvp  
+**Depends on**: Phase 5  
+**Requirements**: READ-03, READ-04, READ-05, NAV-05, ANLY-01  
+**Success Criteria** (what must be TRUE):
+  1. Reader sees an unobtrusive reading depth indicator while scrolling through long-form articles.
+  2. Reader can print or export articles to PDF with a dedicated print stylesheet that strips site navigation and headers.
+  3. Reader can copy shareable article deep links with clipboard feedback toast, and links generate rich Open Graph preview cards.
+  4. Related subtopics component suggests relevant articles at the base of each reading view.
+  5. Admin can view internal platform metrics including page view counters, feedback satisfaction ratios, and search trends.
+**Plans**: 3 plans
+
+Plans:
+- [ ] 06-01: Implement reading progress indicator and print/PDF-optimized stylesheets
+- [ ] 06-02: Implement shareable deep links with copy toast, Open Graph metadata, and related subtopic recommendations
+- [ ] 06-03: Build admin internal analytics dashboard with page view counters and feedback metrics
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Project Foundation & Database Architecture | 0/2 | Not started | - |
+| 2. Global Shell, Navigation & Static Pages | 0/3 | Not started | - |
+| 3. Core Discovery & Subtopic Reading Experience | 0/3 | Not started | - |
+| 4. Admin Authentication & Content Management System | 0/4 | Not started | - |
+| 5. Full-Text Search, Feedback & Suggestion Box | 0/3 | Not started | - |
+| 6. Reading Tools, Social Sharing, Polish & Analytics | 0/3 | Not started | - |
