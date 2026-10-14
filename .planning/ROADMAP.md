@@ -49,9 +49,11 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Build global layout shell, header, footer, and theme provider with dark/light mode toggle
-- [ ] 02-02: Implement slide-out Content Drawer navigation with nested topic hierarchy and route detection
-- [ ] 02-03: Implement Landing page (`docs/screens/Landing.png`), About, Contact, and Privacy Notice pages
+- Wave 1:
+  - [ ] 02-01: Build global layout shell, header, footer, and theme provider with dark/light mode toggle
+- Wave 2 (depends on 02-01):
+  - [ ] 02-02: Implement slide-out Content Drawer navigation with nested topic hierarchy and route detection
+  - [ ] 02-03: Implement Landing page (`docs/screens/Landing.png`), About, Contact, and Privacy Notice pages
 
 ### Phase 3: Core Discovery & Subtopic Reading Experience
 **Goal**: Enable readers to browse 7 major societal topics and read comprehensive Markdown subtopic articles styled with topic-specific banner accent colors and verified academic citations.  
