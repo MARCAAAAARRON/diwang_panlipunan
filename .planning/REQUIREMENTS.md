@@ -40,16 +40,16 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 ### Full-Text Search
 
-- [ ] **SRCH-01**: User can access a search bar from the global navigation
-- [ ] **SRCH-02**: Full-text search queries topic titles, subtopic titles, summaries, and Markdown content using PostgreSQL tsvector (`simple` config)
-- [ ] **SRCH-03**: Search results display matching snippets, topic badges, and direct links to subtopic articles
+- [x] **SRCH-01**: User can access a search bar from the global navigation
+- [x] **SRCH-02**: Full-text search queries topic titles, subtopic titles, summaries, and Markdown content using PostgreSQL tsvector (`simple` config)
+- [x] **SRCH-03**: Search results display matching snippets, topic badges, and direct links to subtopic articles
 
 ### Community Feedback & Suggestions
 
-- [ ] **FDBK-01**: User can submit binary feedback ("Nakatulong ba ito? Oo / Hindi") on subtopic articles
-- [ ] **FDBK-02**: User can submit an optional short text comment explaining their feedback
-- [ ] **SUGG-01**: User can submit a social issue suggestion ("Magmungkahi ng Paksa") via public submission form
-- [ ] **SUGG-02**: System validates submissions with Zod schemas and prevents spam abuse with client/server rate limiting
+- [x] **FDBK-01**: User can submit binary feedback ("Nakatulong ba ito? Oo / Hindi") on subtopic articles
+- [x] **FDBK-02**: User can submit an optional short text comment explaining their feedback
+- [x] **SUGG-01**: User can submit a social issue suggestion ("Magmungkahi ng Paksa") via public submission form
+- [x] **SUGG-02**: System validates submissions with Zod schemas and prevents spam abuse with client/server rate limiting
 
 ### Admin Authentication & Security
 
@@ -67,8 +67,8 @@ Requirements for initial release covering all P0, P1, and P2 capabilities. Each 
 
 ### Admin Triage & Analytics
 
-- [ ] **TRG-01**: Admin can view feedback submissions aggregated by subtopic, including satisfaction percentages and reader comments
-- [ ] **TRG-02**: Admin can triage topic suggestions with status updates (Pending, In Review, Implemented, Dismissed)
+- [x] **TRG-01**: Admin can view feedback submissions aggregated by subtopic, including satisfaction percentages and reader comments
+- [x] **TRG-02**: Admin can triage topic suggestions with status updates (Pending, In Review, Implemented, Dismissed)
 - [ ] **ANLY-01**: Admin can view internal platform analytics including article page views, feedback totals, and frequent search terms
 
 ---
@@ -108,43 +108,42 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DISC-01 | Phase 3 | Pending |
-| DISC-02 | Phase 3 | Pending |
-| READ-01 | Phase 3 | Pending |
-| READ-02 | Phase 3 | Pending |
+| DISC-01 | Phase 3 | Complete |
+| DISC-02 | Phase 3 | Complete |
+| READ-01 | Phase 3 | Complete |
+| READ-02 | Phase 3 | Complete |
 | READ-03 | Phase 6 | Pending |
 | READ-04 | Phase 6 | Pending |
 | READ-05 | Phase 6 | Pending |
-| SRC-01 | Phase 3 | Pending |
-| SRC-02 | Phase 3 | Pending |
-| SRC-03 | Phase 3 | Pending |
-| NAV-01 | Phase 2 | Pending |
-| NAV-02 | Phase 2 | Pending |
-| NAV-03 | Phase 2 | Pending |
-| NAV-04 | Phase 2 | Pending |
+| SRC-01 | Phase 3 | Complete |
+| SRC-02 | Phase 3 | Complete |
+| SRC-03 | Phase 3 | Complete |
+| NAV-01 | Phase 2 | Complete |
+| NAV-02 | Phase 2 | Complete |
+| NAV-03 | Phase 2 | Complete |
+| NAV-04 | Phase 2 | Complete |
 | NAV-05 | Phase 6 | Pending |
-| PAGE-01 | Phase 2 | Pending |
-| PAGE-02 | Phase 2 | Pending |
-| PAGE-03 | Phase 2 | Pending |
-| PAGE-04 | Phase 2 | Pending |
-| SRCH-01 | Phase 5 | Pending |
-| SRCH-02 | Phase 5 | Pending |
-| SRCH-03 | Phase 5 | Pending |
-| FDBK-01 | Phase 5 | Pending |
-| FDBK-02 | Phase 5 | Pending |
-| SUGG-01 | Phase 5 | Pending |
-| SUGG-02 | Phase 5 | Pending |
-| AUTH-01 | Phase 4 | Pending |
-| AUTH-02 | Phase 4 | Pending |
+| PAGE-01 | Phase 2 | Complete |
+| PAGE-02 | Phase 2 | Complete |
+| PAGE-03 | Phase 2 | Complete |
+| PAGE-04 | Phase 2 | Complete |
+| SRCH-01 | Phase 5 | Complete |
+| SRCH-02 | Phase 5 | Complete |
+| SRCH-03 | Phase 5 | Complete |
+| FDBK-01 | Phase 5 | Complete |
+| FDBK-02 | Phase 5 | Complete |
+| SUGG-01 | Phase 5 | Complete |
+| SUGG-02 | Phase 5 | Complete |
+| AUTH-01 | Phase 4 | Complete |
+| AUTH-02 | Phase 4 | Complete |
 | AUTH-03 | Phase 1 | Complete |
-
-| AUTH-04 | Phase 4 | Pending |
-| CMS-01 | Phase 4 | Pending |
-| CMS-02 | Phase 4 | Pending |
-| CMS-03 | Phase 4 | Pending |
-| CMS-04 | Phase 4 | Pending |
-| TRG-01 | Phase 5 | Pending |
-| TRG-02 | Phase 5 | Pending |
+| AUTH-04 | Phase 4 | Complete |
+| CMS-01 | Phase 4 | Complete |
+| CMS-02 | Phase 4 | Complete |
+| CMS-03 | Phase 4 | Complete |
+| CMS-04 | Phase 4 | Complete |
+| TRG-01 | Phase 5 | Complete |
+| TRG-02 | Phase 5 | Complete |
 | ANLY-01 | Phase 6 | Pending |
 
 **Coverage:**
