@@ -12,45 +12,45 @@ Accessible, credible, and thought-provoking educational content on Philippine so
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ US-01: Browse Topics & Subtopics (P0) — Explore 7 major themes and nested subtopics — v1.0
+- ✓ US-02: Read Subtopic Content (P0) — Rich Markdown article reading with banner theming, summary, and metadata — v1.0
+- ✓ US-03: View Sources & Citations (P0) — Reliable citations list with direct external links per subtopic — v1.0
+- ✓ US-04: Content Drawer Navigation (P0) — Slide-out directory navigation to all topics, subtopics, and static pages — v1.0
+- ✓ US-05: Dark / Light Mode Toggle (P0) — Persistent theme switcher with high-contrast editorial tokens — v1.0
+- ✓ US-06: Static Informational Pages (P0) — Landing page matching design mock, Tungkol sa Amin, Makipag-ugnayan, and Privacy Notice — v1.0
+- ✓ US-07: Admin Authentication (P0) — Secure email/password login restricted to verified admin profile — v1.0
+- ✓ US-08: Admin Content Management (P0) — CRUD operations for Topics and Subtopics with live Markdown editor — v1.0
+- ✓ US-09: Admin Sources Management (P0) — Add, edit, reorder, and remove citations per subtopic — v1.0
+- ✓ US-10: Content Feedback (P1) — Binary feedback ("Nakatulong ba ito? Oo / Hindi") with optional comment — v1.0
+- ✓ US-11: Suggestion Box (P1) — Public submission form for proposing new societal issues to cover — v1.0
+- ✓ US-12: Full-Text Search (P1) — Fast search across topics, subtopics, summaries, and content using PostgreSQL tsvector — v1.0
+- ✓ US-13: Admin Feedback & Suggestions Triage (P1) — Review reader feedback and filter/action topic suggestions — v1.0
+- ✓ US-14: Reading Progress Indicator (P2) — Unobtrusive 2.5px fixed scroll depth indicator on subtopic articles — v1.0
+- ✓ US-15: Shareable Deep Links (P2) — Quick copy/share links for articles with Open Graph metadata — v1.0
+- ✓ US-16: Related Subtopics (P2) — 2 sibling + 1 cross-thematic recommendations at article footer — v1.0
+- ✓ US-17: Print / PDF-Friendly View (P2) — Broadsheet stylesheet stripping web chrome for academic handouts — v1.0
+- ✓ US-18: Analytics Dashboard (Internal) (P2) — First-party privacy-preserving readership, search, and feedback trends — v1.0
 
-### Active
+### Active (v2 Pipeline)
 
-- [ ] US-01: Browse Topics & Subtopics (P0) — Explore 7 major themes and their nested subtopic articles
-- [ ] US-02: Read Subtopic Content (P0) — Rich Markdown article reading with banner theming, summary, and metadata
-- [ ] US-03: View Sources & Citations (P0) — Reliable citations list with direct external links per subtopic
-- [ ] US-04: Content Drawer Navigation (P0) — Slide-out directory navigation to all topics, subtopics, and static pages
-- [ ] US-05: Dark / Light Mode Toggle (P0) — Persistent theme switcher with high-contrast editorial tokens
-- [ ] US-06: Static Informational Pages (P0) — Landing page (from design mock), Tungkol sa Amin (About), Makipag-ugnayan (Contact), and Privacy Notice
-- [ ] US-07: Admin Authentication (P0) — Secure email/password login restricted to verified admin profile
-- [ ] US-08: Admin Content Management (P0) — CRUD operations for Topics and Subtopics with Markdown editor and draft/published status
-- [ ] US-09: Admin Sources Management (P0) — Add, edit, reorder, and remove citations per subtopic
-- [ ] US-10: Content Feedback (P1) — Binary feedback ("Nakatulong ba ito? Oo / Hindi") with optional comment
-- [ ] US-11: Suggestion Box (P1) — Public submission form for proposing new societal issues to cover
-- [ ] US-12: Full-Text Search (P1) — Fast search across topics, subtopics, summaries, and content using PostgreSQL tsvector
-- [ ] US-13: Admin Feedback & Suggestions Triage (P1) — Review reader feedback and filter/action topic suggestions (pending, reviewed, implemented, dismissed)
-- [ ] US-14: Reading Progress Indicator (P2) — Subtle reading depth indicator on subtopic articles
-- [ ] US-15: Shareable Deep Links (P2) — Quick copy/share links for articles with Open Graph metadata
-- [ ] US-16: Related Subtopics (P2) — Curated or algorithmic recommendations at the bottom of articles
-- [ ] US-17: Print / PDF-Friendly View (P2) — Clean stylesheet removing chrome and drawer for academic handouts
-- [ ] US-18: Analytics Dashboard (Internal) (P2) — View counts, feedback metrics, and search query trends for admin
+- [ ] US-19: Role-Based Access Control (RBAC) (P1) — Multi-tiered admin permissions (Editor, Reviewer, Super Admin)
+- [ ] US-20: Dynamic Multilingual Language Toggle (P1) — Dynamic switching between Filipino and English for full UI and articles
+- [ ] US-21: Moderated Community Discussions / Annotations (P2) — Controlled paragraph-level annotations and discourse
+- [ ] US-22: Social OAuth Login for Admins (P2) — Google and GitHub OAuth authentication for administrators
 
 ### Out of Scope
 
 - Learner user registration / authentication — Platform is completely open-access and friction-free; readers do not need accounts.
-- Public open comment sections — High risk of unmoderated misinformation and vitriol; structured suggestions and binary feedback provide healthy interaction.
-- Editor / Moderator multi-tier roles — Single admin account is sufficient for initial launch; RBAC deferred.
-- Social OAuth logins — Unnecessary complexity for single-admin deployment.
+- Public unmoderated open comment sections — High risk of unmoderated misinformation and vitriol; structured suggestions and binary feedback provide healthy interaction.
 - Commercial monetization / paywalls / ads — Non-profit civic educational mission.
-- Real-time chat or AI chat bot — Editorial curation with academic/journalistic citations is prioritized over LLM generation.
-- Dynamic multilingual toggle — Strictly specified as Filipino for branding, headings, and buttons; English for search, form validation, and subtopic body text.
+- Real-time chat or AI chatbot generation — Editorial curation with academic/journalistic citations is prioritized over LLM generation.
 
 ## Context
 
+- **Current State**: Shipped v1.0 with 9,108 LOC TypeScript across 132 files. 21 production Next.js routes, full Supabase RLS and storage integration.
 - **Ecosystem**: Next.js App Router (TypeScript), Tailwind CSS + CSS variable theme tokens, Supabase (PostgreSQL, Auth, Storage), Zod validation, react-markdown, Lucide React, Vercel deployment.
 - **Design System**: Editorial flat design inspired by broadsheet journalism and academic reviews. Zero drop shadows, zero rounded pill-boxes, zero glassmorphism. Typography: Source Serif 4 (headings), Public Sans (body). 7 distinctive topic colorways defined in DESIGN.md.
-- **Assets & References**: Complete UI mockups exist in `docs/screens/` (Landing.png, Home.png, Drawer.png, About.png, AdminTopics.png) and `docs/logo/Logo.png`.
-- **Infrastructure**: Single Supabase project with Row Level Security (RLS), custom `is_admin()` security definer function, and automated user-profile trigger.
+- **Infrastructure**: Supabase project with Row Level Security (RLS), custom `is_admin()` security definer function, and automated user-profile trigger.
 
 ## Constraints
 
@@ -64,30 +64,15 @@ Accessible, credible, and thought-provoking educational content on Philippine so
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Next.js App Router + TypeScript | Server components for SEO, optimal performance, and type safety | — Pending |
-| Build all P0, P1, and P2 stories | Delivers a complete, polished educational platform | — Pending |
-| Landing page matching docs/screens/Landing.png | Faithful implementation of stakeholder-approved brand experience | — Pending |
-| Single admin role at launch (no editor tier) | Minimizes administrative overhead while securing content management | — Pending |
-| Dedicated Privacy Notice page | Transparent data disclosures for suggestion box and reader feedback | — Pending |
-| PostgreSQL `simple` text search configuration | Avoids language stemmer errors for mixed Filipino/English content | — Pending |
-| Flat editorial visual language | Creates a dignified, serious tone suited for public social consciousness | — Pending |
-
-## Evolution
-
-This document evolves at phase transitions and milestone boundaries.
-
-**After each phase transition** (via `/gsd-transition`):
-1. Requirements invalidated? → Move to Out of Scope with reason
-2. Requirements validated? → Move to Validated with phase reference
-3. New requirements emerged? → Add to Active
-4. Decisions to log? → Add to Key Decisions
-5. "What This Is" still accurate? → Update if drifted
-
-**After each milestone** (via `/gsd-complete-milestone`):
-1. Full review of all sections
-2. Core Value check — still the right priority?
-3. Audit Out of Scope — reasons still valid?
-4. Update Context with current state
+| Next.js App Router + TypeScript | Server components for SEO, optimal performance, and type safety | ✓ Good |
+| Build all P0, P1, and P2 stories | Delivers a complete, polished educational platform | ✓ Good |
+| Landing page matching docs/screens/Landing.png | Faithful implementation of stakeholder-approved brand experience | ✓ Good |
+| Single admin role at launch (no editor tier) | Minimizes administrative overhead while securing content management | ✓ Good |
+| Dedicated Privacy Notice page | Transparent data disclosures for suggestion box and reader feedback | ✓ Good |
+| PostgreSQL `simple` text search configuration | Avoids language stemmer errors for mixed Filipino/English content | ✓ Good |
+| Flat editorial visual language | Creates a dignified, serious tone suited for public social consciousness | ✓ Good |
+| First-party privacy-preserving analytics | Zero cookies, zero IP logging, zero external trackers for student privacy | ✓ Good |
+| Broadsheet print CSS | Enables classroom and offline study handouts directly from web articles | ✓ Good |
 
 ---
-*Last updated: 2026-10-14 after initialization*
+*Last updated: 2026-10-14 after v1.0 milestone*
