@@ -7,43 +7,50 @@ export default function LandingPage() {
   const topics = [
     {
       num: "01",
-      title: "Environment and Climate Change",
+      titleFil: "Kapaligiran at Pagbabago ng Klima",
+      titleEn: "Environment and Climate Change",
       desc: "Examining the local and global ecological crisis, climate resilience, and equitable resource stewardship.",
       slug: "kapaligiran",
     },
     {
       num: "02",
-      title: "Economy and Livelihood",
+      titleFil: "Ekonomiya at Kabuhayan",
+      titleEn: "Economy and Livelihood",
       desc: "Understanding inflation, labor rights, agrarian realities, and structural economic development in the Philippines.",
       slug: "ekonomiya",
     },
     {
       num: "03",
-      title: "Politics and Governance",
+      titleFil: "Pamamahala at Demokrasya",
+      titleEn: "Politics and Governance",
       desc: "Scrutinizing public institutions, democratic engagement, accountability, and the rule of law.",
       slug: "pamahalaan",
     },
     {
       num: "04",
-      title: "Human Rights and Social Justice",
+      titleFil: "Karapatang Pantao at Katarungang Panlipunan",
+      titleEn: "Human Rights and Social Justice",
       desc: "Defending civil liberties, indigenous rights, restorative justice, and community empowerment.",
       slug: "karapatang-pantao",
     },
     {
       num: "05",
-      title: "Education and Society",
+      titleFil: "Edukasyon at Lipunan",
+      titleEn: "Education and Society",
       desc: "Bridging systemic gaps in civic literacy, public school resources, and equitable learning access.",
       slug: "edukasyon",
     },
     {
       num: "06",
-      title: "Globalization and Global Issues",
+      titleFil: "Globalisasyon at Pandaigdigang Ugnayan",
+      titleEn: "Globalization and Global Issues",
       desc: "Analyzing international relations, migrant labor, sovereignty, and regional cooperation in Southeast Asia.",
       slug: "teknolohiya",
     },
     {
       num: "07",
-      title: "Sustainable Development",
+      titleFil: "Likas-Kayang Kaunlaran",
+      titleEn: "Sustainable Development",
       desc: "Balancing economic expansion with intergenerational environmental protection and community welfare.",
       slug: "kalusugan",
     },
@@ -125,7 +132,7 @@ export default function LandingPage() {
               </div>
 
               {/* Civic Archive Callout Card */}
-              <div className="mt-8 p-4 sm:p-5 rounded-md border border-border bg-surface border-l-4 border-l-primary-large">
+              <div className="mt-8 p-4 sm:p-5 rounded-md border border-border bg-surface border-l-[3px] border-l-primary-large">
                 <div className="flex items-start gap-3">
                   <BookOpen className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                   <div className="space-y-1">
@@ -156,7 +163,7 @@ export default function LandingPage() {
                   <p className="text-xs sm:text-sm italic text-text-muted leading-snug">
                     &ldquo;Mga mag-aaral at mananaliksik sa isang bukas na talakayan ukol sa kasaysayan at lipunang Pilipino.&rdquo;
                   </p>
-                  <div className="flex items-center justify-between text-[11px] font-semibold tracking-wider text-text-muted uppercase border-t border-border pt-2">
+                  <div className="flex items-center justify-between text-xs font-semibold tracking-[0.06em] text-text-muted uppercase border-t border-border pt-2">
                     <span>DOKUMENTASYON</span>
                     <span>Lungsod Quezon, 2025</span>
                   </div>
@@ -195,10 +202,13 @@ export default function LandingPage() {
                   {topic.num}
                 </span>
                 <div className="space-y-1 min-w-0">
-                  <h3 className="font-serif text-base sm:text-lg font-bold text-text group-hover:text-primary group-hover:underline transition-colors">
-                    {topic.title}
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-text group-hover:text-primary group-hover:underline transition-colors leading-snug">
+                    {topic.titleFil}
                   </h3>
-                  <p className="text-xs sm:text-sm text-text-muted leading-relaxed line-clamp-2">
+                  <p className="text-xs font-sans text-primary/80 font-medium tracking-wide">
+                    {topic.titleEn}
+                  </p>
+                  <p className="text-xs sm:text-sm text-text-muted leading-relaxed line-clamp-2 pt-0.5">
                     {topic.desc}
                   </p>
                 </div>
@@ -227,7 +237,7 @@ export default function LandingPage() {
                 className="p-4 rounded-md border border-border bg-surface space-y-2 flex flex-col justify-between"
               >
                 <div className="space-y-1">
-                  <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-primary block">
+                  <span className="text-xs font-mono font-semibold uppercase tracking-[0.06em] text-primary block">
                     {val.step}
                   </span>
                   <h3 className="font-serif text-base font-bold text-text">
@@ -246,34 +256,34 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 4. Bukas na Paanyaya Banner */}
+      {/* 4. Bukas na Pakikisangkot Banner */}
       <section className="py-12 md:py-16 bg-page">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-md border border-border bg-surface p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                BUKAS NA PAANYAYA
+                BUKAS NA PAKIKISANGKOT
               </span>
               <h2 className="font-serif text-xl sm:text-2xl font-bold text-text">
-                Handa ka na bang sumali sa talakayan?
+                May nais ka bang talakaying isyung panlipunan?
               </h2>
               <p className="text-sm text-text-muted leading-relaxed">
-                Lumikha ng sariling account upang makapag-ambag ng pagsusuri, mag-save ng mga dokumento sa sariling aklatan, at makibahagi sa pampublikong diskurso.
+                Malayang bukas ang Diwang Panlipunan para sa lahat nang walang bayad o kailangang account. Magmungkahi ng bagong paksa o suriin ang buong talaan ng mga aralin para sa iyong klase at pananaliksik.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <Link
-                href="/login"
-                className="inline-flex items-center justify-center h-10 px-5 rounded-md border border-border bg-surface text-text text-sm font-medium hover:border-accent hover:text-primary transition-colors"
+                href="/magmungkahi"
+                className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
               >
-                Mag-login
+                Magmungkahi ng Paksa
               </Link>
               <Link
-                href="/register"
-                className="inline-flex items-center justify-center h-10 px-5 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors"
+                href="/home"
+                className="inline-flex items-center justify-center h-11 px-6 rounded-md border border-border bg-surface text-text text-sm font-medium hover:border-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
               >
-                Mag-register
+                Tuklasin ang mga Aralin
               </Link>
             </div>
           </div>
