@@ -24,6 +24,14 @@ const publicSans = Public_Sans({
 export const metadata: Metadata = {
   title: "Diwang Panlipunan",
   description: "Pag-unawa sa Lipunan, Pagmulat sa Kinabukasan — Isang platapormang pang-edukasyon para sa kamalayang panlipunan.",
+  icons: {
+    icon: [
+      { url: "/images/LOGO.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/images/LOGO.png",
+    apple: "/images/LOGO.png",
+  },
 };
 
 const zeroFOUCScript = `
@@ -50,6 +58,8 @@ export default function RootLayout({
   return (
     <html lang="fil" suppressHydrationWarning className={`${sourceSerif4.variable} ${publicSans.variable}`}>
       <head>
+        <link rel="icon" href="/images/LOGO.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/LOGO.png" />
         <script dangerouslySetInnerHTML={{ __html: zeroFOUCScript }} />
       </head>
       <body className="min-h-screen font-sans bg-page text-text antialiased flex flex-col transition-colors duration-150">
