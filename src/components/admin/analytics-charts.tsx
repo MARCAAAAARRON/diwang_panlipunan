@@ -24,7 +24,7 @@ export function AnalyticsCharts({
         <div className="p-6 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] space-y-5">
           <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
             <div className="space-y-0.5">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-primary)] font-semibold flex items-center gap-1">
+              <span className="text-xs font-mono uppercase tracking-[0.06em] text-[var(--color-primary)] font-semibold flex items-center gap-1">
                 <Award className="w-3.5 h-3.5" />
                 PINAKABINABASA
               </span>
@@ -69,7 +69,7 @@ export function AnalyticsCharts({
                         <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                       </Link>
                     </h3>
-                    <span className="text-[11px] font-mono text-[var(--color-text-muted)]">
+                    <span className="text-xs font-mono text-[var(--color-text-muted)]">
                       {article.topicTitle}
                     </span>
                   </div>
@@ -80,7 +80,7 @@ export function AnalyticsCharts({
                     <Eye className="w-3.5 h-3.5 text-[var(--color-text-muted)]" />
                     <span>{article.views.toLocaleString()}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[var(--color-text-muted)]">
+                  <span className="text-xs font-mono text-[var(--color-text-muted)]">
                     pagbasa
                   </span>
                 </div>
@@ -92,7 +92,7 @@ export function AnalyticsCharts({
         {/* Reading Share by Societal Theme */}
         <div className="p-6 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] space-y-5">
           <div className="border-b border-[var(--color-border)] pb-3 space-y-0.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-primary)] font-semibold flex items-center gap-1">
+            <span className="text-xs font-mono uppercase tracking-[0.06em] text-[var(--color-primary)] font-semibold flex items-center gap-1">
               <TrendingUp className="w-3.5 h-3.5" />
               DISTRIBUSYON
             </span>
@@ -114,7 +114,7 @@ export function AnalyticsCharts({
                     />
                     <span>{theme.topicTitle}</span>
                   </span>
-                  <span className="font-mono text-[11px] text-[var(--color-text-muted)]">
+                  <span className="font-mono text-xs text-[var(--color-text-muted)]">
                     <strong className="text-[var(--color-text)] font-semibold">
                       {theme.views.toLocaleString()}
                     </strong>{" "}
@@ -141,7 +141,7 @@ export function AnalyticsCharts({
       <div className="lg:col-span-5 space-y-8">
         <div className="p-6 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] space-y-5">
           <div className="border-b border-[var(--color-border)] pb-3 space-y-0.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-primary)] font-semibold flex items-center gap-1">
+            <span className="text-xs font-mono uppercase tracking-[0.06em] text-[var(--color-primary)] font-semibold flex items-center gap-1">
               <Search className="w-3.5 h-3.5" />
               TENDENSIYA SA PAGHAHANAP
             </span>
@@ -161,7 +161,7 @@ export function AnalyticsCharts({
                 className="py-3 first:pt-0 last:pb-0 flex items-center justify-between gap-3 text-xs"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <span className="font-mono text-[11px] text-[var(--color-text-muted)] w-4 text-right shrink-0">
+                  <span className="font-mono text-xs text-[var(--color-text-muted)] w-4 text-right shrink-0">
                     {index + 1}.
                   </span>
                   <Link
@@ -174,7 +174,7 @@ export function AnalyticsCharts({
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-2 py-0.5 rounded font-mono text-[11px] font-semibold bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)]">
+                  <span className="px-2 py-0.5 rounded font-mono text-xs font-semibold bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)]">
                     {item.count} beses
                   </span>
                 </div>

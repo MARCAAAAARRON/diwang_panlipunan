@@ -113,7 +113,7 @@ export function ImageUploader({
         <label className="block text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)]">
           {label}
         </label>
-        <div className="flex items-center gap-1 text-[11px] font-mono">
+        <div className="flex items-center gap-1 text-xs font-mono">
           <button
             type="button"
             onClick={() => setMode("upload")}
@@ -158,7 +158,7 @@ export function ImageUploader({
             />
           </div>
           <div className="p-2.5 border-t border-[var(--color-border)] flex items-center justify-between text-xs bg-[var(--color-surface)]">
-            <span className="font-mono text-[11px] text-[var(--color-text-muted)] truncate max-w-[260px]">
+            <span className="font-mono text-xs text-[var(--color-text-muted)] truncate max-w-[260px]">
               {value.startsWith("data:") ? "Naka-load na Data URL" : value}
             </span>
             <button
@@ -204,7 +204,7 @@ export function ImageUploader({
                 </span>{" "}
                 o i-drag dito
               </div>
-              <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
+              <p className="text-xs text-[var(--color-text-muted)] font-mono">
                 {description}
               </p>
             </div>
@@ -221,7 +221,7 @@ export function ImageUploader({
                   className="w-full pl-9 pr-3 py-2 text-xs rounded-md border border-[var(--color-input-border)] bg-[var(--color-bg)] text-[var(--color-text)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] font-mono"
                 />
               </div>
-              <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
+              <p className="text-xs text-[var(--color-text-muted)] font-mono">
                 Maglagay ng pampublikong URL ng larawan (HTTPS lamang).
               </p>
             </div>

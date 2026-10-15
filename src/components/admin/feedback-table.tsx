@@ -57,7 +57,7 @@ export function FeedbackTable({ data }: FeedbackTableProps) {
                     <div className="font-serif font-bold text-sm text-[var(--color-text)]">
                       {item.subtopicTitle}
                     </div>
-                    <div className="text-[11px] text-[var(--color-text-muted)] mt-0.5">
+                    <div className="text-xs text-[var(--color-text-muted)] mt-0.5">
                       {item.topicTitle}
                     </div>
                   </td>
@@ -78,7 +78,7 @@ export function FeedbackTable({ data }: FeedbackTableProps) {
 
                   <td className="py-3.5 px-4">
                     <div className="space-y-1 w-36">
-                      <div className="flex items-center justify-between text-[11px] font-mono">
+                      <div className="flex items-center justify-between text-xs font-mono">
                         <span className="font-bold text-[var(--color-text)]">
                           {item.totalVotes > 0 ? `${item.satisfactionRate}%` : "—"}
                         </span>
@@ -100,13 +100,13 @@ export function FeedbackTable({ data }: FeedbackTableProps) {
                       <button
                         type="button"
                         onClick={() => setSelectedSubtopic(item)}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[var(--color-border)] bg-[var(--color-page)] hover:border-[var(--color-primary)] text-[11px] font-mono font-medium text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[var(--color-border)] bg-[var(--color-page)] hover:border-[var(--color-primary)] text-xs font-mono font-medium text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
                       >
                         <MessageSquare className="w-3 h-3" />
                         <span>{item.comments.length} puna</span>
                       </button>
                     ) : (
-                      <span className="text-[11px] font-mono text-[var(--color-text-muted)]">
+                      <span className="text-xs font-mono text-[var(--color-text-muted)]">
                         Walang puna
                       </span>
                     )}
@@ -116,7 +116,7 @@ export function FeedbackTable({ data }: FeedbackTableProps) {
                     <Link
                       href={`/topics/${item.topicSlug}/${item.subtopicSlug}`}
                       target="_blank"
-                      className="inline-flex items-center gap-1 text-[11px] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+                      className="inline-flex items-center gap-1 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
                       title="Buksan ang aralin"
                     >
                       <span>Aralin</span>
@@ -141,7 +141,7 @@ export function FeedbackTable({ data }: FeedbackTableProps) {
             {/* Modal Header */}
             <div className="flex items-start justify-between p-5 border-b border-[var(--color-border)]">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-muted)]">
+                <span className="text-xs font-mono uppercase tracking-[0.06em] text-[var(--color-text-muted)]">
                   MGA PUNA NG MAMBABASA • {selectedSubtopic.topicTitle}
                 </span>
                 <h3 className="font-serif text-lg font-bold text-[var(--color-text)] mt-0.5">
@@ -161,7 +161,7 @@ export function FeedbackTable({ data }: FeedbackTableProps) {
             <div className="p-5 overflow-y-auto space-y-3.5 divide-y divide-[var(--color-border)]">
               {selectedSubtopic.comments.map((c, idx) => (
                 <div key={c.id || idx} className="pt-3.5 first:pt-0 space-y-1.5">
-                  <div className="flex items-center justify-between text-[11px] text-[var(--color-text-muted)] font-mono">
+                  <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)] font-mono">
                     <span className="inline-flex items-center gap-1">
                       {c.isHelpful ? (
                         <span className="text-emerald-700 dark:text-emerald-400 font-semibold inline-flex items-center gap-1">

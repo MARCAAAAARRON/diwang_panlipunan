@@ -222,7 +222,7 @@ export function CitationsManager({
                 {/* Form Inputs Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                   <div className="space-y-1">
-                    <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text)]">
+                    <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
                       May-akda / Institusyon
                     </label>
                     <input
@@ -237,7 +237,7 @@ export function CitationsManager({
                   </div>
 
                   <div className="space-y-1 sm:col-span-2">
-                    <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text)]">
+                    <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
                       Pamagat ng Lathalain / Dokumento *
                     </label>
                     <input
@@ -253,7 +253,7 @@ export function CitationsManager({
                   </div>
 
                   <div className="space-y-1">
-                    <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text)]">
+                    <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
                       Lathalain / Ahensiya *
                     </label>
                     <input
@@ -272,7 +272,7 @@ export function CitationsManager({
                 {/* Row 2: Date & URL */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="space-y-1">
-                    <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text)]">
+                    <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
                       Taon / Petsa
                     </label>
                     <input
@@ -287,7 +287,7 @@ export function CitationsManager({
                   </div>
 
                   <div className="space-y-1 sm:col-span-2">
-                    <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text)]">
+                    <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
                       URL ng Sanggunian (HTTPS)
                     </label>
                     <div className="flex items-center gap-1.5">

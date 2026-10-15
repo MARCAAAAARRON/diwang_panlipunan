@@ -134,7 +134,7 @@ export function SubtopicsTable({ subtopics, topics }: SubtopicsTableProps) {
                   {/* Left: Article Details */}
                   <div className="space-y-1.5 flex-1 max-w-3xl">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-primary)]">
+                      <span className="font-mono text-xs font-bold uppercase tracking-[0.06em] px-2 py-0.5 rounded border border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-primary)]">
                         {item.topic?.name_fil || "Paksa"}
                       </span>
                       <span className="font-mono text-xs text-[var(--color-text-muted)]">
@@ -163,7 +163,7 @@ export function SubtopicsTable({ subtopics, topics }: SubtopicsTableProps) {
                   {/* Right: Status & Actions */}
                   <div className="flex items-center gap-3 sm:gap-4 self-end md:self-center shrink-0">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider border ${
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-mono font-semibold uppercase tracking-[0.06em] border ${
                         item.is_published
                           ? "border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300"
                           : "border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300"

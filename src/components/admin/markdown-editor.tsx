@@ -194,7 +194,7 @@ export function MarkdownEditor({
             activeTab === "preview" ? "hidden lg:flex" : "flex"
           }`}
         >
-          <div className="p-2 bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[11px] font-mono text-[var(--color-text-muted)] flex items-center justify-between">
+          <div className="p-2 bg-[var(--color-bg)] border-b border-[var(--color-border)] text-xs font-mono text-[var(--color-text-muted)] flex items-center justify-between">
             <span>MARKDOWN SOURCE</span>
             <span>UTF-8 • GFM</span>
           </div>
@@ -216,7 +216,7 @@ export function MarkdownEditor({
             ["--topic-color" as string]: `var(--topic-${topicSlug}, var(--color-primary))`,
           }}
         >
-          <div className="p-2 bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[11px] font-mono text-[var(--color-primary)] font-semibold flex items-center justify-between">
+          <div className="p-2 bg-[var(--color-bg)] border-b border-[var(--color-border)] text-xs font-mono text-[var(--color-primary)] font-semibold flex items-center justify-between">
             <span className="flex items-center gap-1.5">
               <Eye className="w-3.5 h-3.5" />
               <span>LIVE BROADSHEET PREVIEW</span>
@@ -252,7 +252,7 @@ export function MarkdownEditor({
             <span>Tinatayang {readTimeMinutes} minutong pagbasa</span>
           </span>
         </div>
-        <div className="text-[11px] text-[var(--color-text-muted)]">
+        <div className="text-xs text-[var(--color-text-muted)]">
           Auto-calc: ~200 wpm
         </div>
       </div>

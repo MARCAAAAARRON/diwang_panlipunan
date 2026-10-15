@@ -159,7 +159,7 @@ export function SubtopicEditForm({
               <button
                 type="button"
                 onClick={handleAutoSlug}
-                className="inline-flex items-center gap-1 text-[11px] font-mono text-[var(--color-primary)] hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1 text-xs font-mono text-[var(--color-primary)] hover:underline cursor-pointer"
               >
                 <Wand2 className="w-3 h-3" />
                 <span>Auto-generate</span>
