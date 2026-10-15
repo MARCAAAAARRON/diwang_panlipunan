@@ -47,6 +47,10 @@ const nextConfig = {
         source: "/suggest",
         destination: "/magmungkahi",
       },
+      {
+        source: "/images/LOGO.png",
+        destination: "/images/Logo.png",
+      },
     ];
   },
 };
