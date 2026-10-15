@@ -48,8 +48,7 @@ export async function loginAdmin(
     const p = profile as any;
     const isExplicitAdmin =
       (p && p.role === "admin") ||
-      data.user.user_metadata?.role === "admin" ||
-      data.user.email === "admin@diwangpanlipunan.ph";
+      data.user.user_metadata?.role === "admin";
 
     if (!isExplicitAdmin) {
       // Invalidate session if not an admin

@@ -27,8 +27,7 @@ export async function POST(request: NextRequest) {
 
     const isExplicitAdmin =
       (profile && (profile as any).role === "admin") ||
-      user.user_metadata?.role === "admin" ||
-      user.email === "admin@diwangpanlipunan.ph";
+      user.user_metadata?.role === "admin";
 
     if (!isExplicitAdmin) {
       return NextResponse.json(

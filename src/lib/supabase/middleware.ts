@@ -83,8 +83,7 @@ export async function updateSession(request: NextRequest) {
     const p = profile as any;
     const isExplicitAdmin =
       (p && p.role === "admin") ||
-      user.user_metadata?.role === "admin" ||
-      user.email === "admin@diwangpanlipunan.ph";
+      user.user_metadata?.role === "admin";
 
     if (!isExplicitAdmin) {
       const url = request.nextUrl.clone();
@@ -110,8 +109,7 @@ export async function updateSession(request: NextRequest) {
       const p = profile as any;
       const isExplicitAdmin =
         (p && p.role === "admin") ||
-        user.user_metadata?.role === "admin" ||
-        user.email === "admin@diwangpanlipunan.ph";
+        user.user_metadata?.role === "admin";
 
       if (isExplicitAdmin) {
         const nextPath = request.nextUrl.searchParams.get("next") || "/admin";

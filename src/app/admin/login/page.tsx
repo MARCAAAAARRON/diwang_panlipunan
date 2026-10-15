@@ -97,7 +97,7 @@ function LoginFormContent() {
                 type="email"
                 autoComplete="email"
                 required
-                placeholder="admin@diwangpanlipunan.ph"
+                placeholder="email@halimbawa.com"
                 className="w-full pl-9 pr-3 py-2.5 text-sm rounded-md border border-[var(--color-input-border)] bg-[var(--color-bg)] text-[var(--color-text)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] font-sans"
               />
             </div>

@@ -20,7 +20,7 @@ export default async function AdminDashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let adminEmail = "admin@diwangpanlipunan.ph";
+  let adminEmail = "Administrador";
 
   try {
     const supabase = await createClient();
