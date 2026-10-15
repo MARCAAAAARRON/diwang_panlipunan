@@ -10,6 +10,7 @@ interface ArticleHeaderProps {
   subtopicTitle: string;
   readTimeMinutes: number;
   publishedAt?: string | null;
+  imageUrl?: string | null;
   imageCaption?: string;
   imageCredit?: string;
 }
@@ -21,6 +22,7 @@ export function ArticleHeader({
   subtopicTitle,
   readTimeMinutes,
   publishedAt,
+  imageUrl,
   imageCaption,
   imageCredit,
 }: ArticleHeaderProps) {
@@ -95,16 +97,28 @@ export function ArticleHeader({
 
       {/* Editorial Featured Photo Container */}
       <figure className="my-6 border border-[var(--color-border)] rounded-md overflow-hidden bg-[var(--color-surface)]">
-        <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-neutral-800 to-neutral-900 flex flex-col items-center justify-center p-6 text-center text-neutral-300 relative">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
-          <ImageIcon className="w-12 h-12 mb-3 text-neutral-400 relative z-10" aria-hidden="true" />
-          <p className="font-serif text-lg text-neutral-200 font-medium max-w-md relative z-10">
-            {subtopicTitle}
-          </p>
-          <span className="mt-2 text-xs font-mono text-neutral-400 uppercase tracking-widest relative z-10">
-            Dokumentasyon ng Larangan • Diwang Panlipunan
-          </span>
-        </div>
+        {imageUrl ? (
+          <div className="relative w-full h-64 sm:h-80 md:h-[420px] bg-neutral-900 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageUrl}
+              alt={subtopicTitle}
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+        ) : (
+          <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-neutral-800 to-neutral-900 flex flex-col items-center justify-center p-6 text-center text-neutral-300 relative">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+            <ImageIcon className="w-12 h-12 mb-3 text-neutral-400 relative z-10" aria-hidden="true" />
+            <p className="font-serif text-lg text-neutral-200 font-medium max-w-md relative z-10">
+              {subtopicTitle}
+            </p>
+            <span className="mt-2 text-xs font-mono text-neutral-400 uppercase tracking-widest relative z-10">
+              Dokumentasyon ng Larangan • Diwang Panlipunan
+            </span>
+          </div>
+        )}
         <figcaption className="p-3.5 sm:p-4 text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border)] bg-[var(--color-surface)] space-y-0.5">
           <p className="font-sans text-[var(--color-text)]">
             <strong className="font-semibold text-[var(--color-primary)]">Larawan:</strong>{" "}

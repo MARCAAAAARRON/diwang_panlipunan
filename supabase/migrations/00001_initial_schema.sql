@@ -53,12 +53,16 @@ create table if not exists public.subtopics (
   summary text not null,
   content_markdown text not null,
   read_time_minutes integer not null default 5,
+  cover_image_url text,
   is_published boolean not null default false,
   published_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   search_vector tsvector
 );
+
+-- Idempotent column check in case table already exists
+alter table public.subtopics add column if not exists cover_image_url text;
 
 comment on table public.subtopics is 'Long-form editorial articles under each topic.';
 

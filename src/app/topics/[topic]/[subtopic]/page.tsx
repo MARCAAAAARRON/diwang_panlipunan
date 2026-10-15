@@ -107,6 +107,7 @@ export default async function SubtopicPage({ params }: SubtopicPageProps) {
             subtopicTitle={article.title}
             readTimeMinutes={article.read_time_minutes}
             publishedAt={article.published_at}
+            imageUrl={article.cover_image_url}
           />
 
           {/* Long-Form Markdown Reading Area */}

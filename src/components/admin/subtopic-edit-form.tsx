@@ -32,7 +32,7 @@ export function SubtopicEditForm({
   const [contentMarkdown, setContentMarkdown] = useState(
     initialData?.content_markdown || ""
   );
-  const [coverUrl, setCoverUrl] = useState("");
+  const [coverUrl, setCoverUrl] = useState(initialData?.cover_image_url || "");
   const [isPublished, setIsPublished] = useState(initialData?.is_published ?? true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<{
@@ -62,6 +62,7 @@ export function SubtopicEditForm({
     const formData = new FormData(e.currentTarget);
     formData.set("topic_id", selectedTopicId);
     formData.set("content_markdown", contentMarkdown);
+    formData.set("cover_image_url", coverUrl);
     if (isPublished) {
       formData.set("is_published", "on");
     } else {

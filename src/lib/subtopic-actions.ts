@@ -22,6 +22,7 @@ export async function createSubtopic(
   const slug = formData.get("slug")?.toString().trim().toLowerCase();
   const summary = formData.get("summary")?.toString().trim();
   const contentMarkdown = formData.get("content_markdown")?.toString() || "";
+  const coverImageUrl = formData.get("cover_image_url")?.toString()?.trim() || null;
   const isPublished = formData.get("is_published") === "on";
 
   if (!topicId || !title || !slug) {
@@ -60,6 +61,7 @@ export async function createSubtopic(
         slug,
         summary: summary || null,
         content_markdown: contentMarkdown,
+        cover_image_url: coverImageUrl,
         read_time_minutes: readTimeMinutes,
         is_published: isPublished,
         published_at: isPublished ? new Date().toISOString() : null,
@@ -68,6 +70,12 @@ export async function createSubtopic(
       .single();
 
     if (error) {
+      if ((error as any).code === "PGRST205" || error.message?.includes("schema cache")) {
+        return {
+          error:
+            "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor.",
+        };
+      }
       return { error: `Hindi nalikha ang aralin: ${error.message}` };
     }
 
@@ -99,6 +107,7 @@ export async function updateSubtopic(
   const slug = formData.get("slug")?.toString().trim().toLowerCase();
   const summary = formData.get("summary")?.toString().trim();
   const contentMarkdown = formData.get("content_markdown")?.toString() || "";
+  const coverImageUrl = formData.get("cover_image_url")?.toString()?.trim() || null;
   const isPublished = formData.get("is_published") === "on";
 
   if (!title || !slug) {
@@ -124,6 +133,7 @@ export async function updateSubtopic(
       slug,
       summary: summary || null,
       content_markdown: contentMarkdown,
+      cover_image_url: coverImageUrl,
       read_time_minutes: readTimeMinutes,
       is_published: isPublished,
       updated_at: new Date().toISOString(),
@@ -144,6 +154,12 @@ export async function updateSubtopic(
       .single();
 
     if (error) {
+      if ((error as any).code === "PGRST205" || error.message?.includes("schema cache")) {
+        return {
+          error:
+            "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor.",
+        };
+      }
       return { error: `Hindi na-save ang aralin: ${error.message}` };
     }
 

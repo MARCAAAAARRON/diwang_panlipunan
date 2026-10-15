@@ -94,6 +94,7 @@ export interface Database {
           summary: string;
           content_markdown: string;
           read_time_minutes: number;
+          cover_image_url?: string | null;
           is_published: boolean;
           published_at: string | null;
           created_at: string;
@@ -108,6 +109,7 @@ export interface Database {
           summary: string;
           content_markdown: string;
           read_time_minutes?: number;
+          cover_image_url?: string | null;
           is_published?: boolean;
           published_at?: string | null;
           created_at?: string;
@@ -122,6 +124,7 @@ export interface Database {
           summary?: string;
           content_markdown?: string;
           read_time_minutes?: number;
+          cover_image_url?: string | null;
           is_published?: boolean;
           published_at?: string | null;
           created_at?: string;
