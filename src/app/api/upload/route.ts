@@ -105,8 +105,15 @@ export async function POST(request: NextRequest) {
     });
   } catch (err: any) {
     console.error("[api/upload] Error:", err);
+    let errorMessage = err?.message || "Nagkaroon ng aberya sa pag-upload ng larawan sa Cloudinary.";
+
+    if (err?.http_code === 403 || String(errorMessage).includes("403")) {
+      errorMessage =
+        "Cloudinary Permission Error: Walang pahintulot na mag-upload ang kasalukuyang API Key (kailangan ng 'create' / upload permission). Sa Cloudinary Console > Settings > Access Keys, i-enable ang 'Create/Upload' permission para sa key na ito, o gamitin ang Master API Key mula sa Dashboard.";
+    }
+
     return NextResponse.json(
-      { error: err?.message || "Nagkaroon ng aberya sa pag-upload ng larawan sa Cloudinary." },
+      { error: errorMessage },
       { status: 500 }
     );
   }

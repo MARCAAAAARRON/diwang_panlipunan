@@ -23,6 +23,23 @@ export function ImageUploader({
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const [lastFailedFile, setLastFailedFile] = useState<File | null>(null);
+
+  const applyDataUrlFallback = (f?: File) => {
+    const target = f || lastFailedFile;
+    if (!target) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        onChange(reader.result.toString());
+        setError(null);
+        setLastFailedFile(null);
+      }
+      setUploading(false);
+    };
+    reader.readAsDataURL(target);
+  };
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -31,6 +48,7 @@ export function ImageUploader({
 
   const processFile = async (file: File) => {
     setError(null);
+    setLastFailedFile(null);
 
     // Validate MIME type
     const validTypes = ["image/jpeg", "image/png", "image/webp"];
@@ -68,29 +86,16 @@ export function ImageUploader({
 
       // If Cloudinary is unconfigured, provide local Data URL fallback for frictionless test
       if (data.unconfigured) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (reader.result) {
-            onChange(reader.result.toString());
-          }
-          setUploading(false);
-        };
-        reader.readAsDataURL(file);
+        applyDataUrlFallback(file);
         setError("Paunawa: Naka-load muna bilang lokal na Data URL dahil hindi pa naka-set ang CLOUDINARY credentials sa .env.local.");
         return;
       }
 
+      setLastFailedFile(file);
       setError(data.error || "Pumalya ang pag-upload sa Cloudinary.");
     } catch {
-      // Offline / network fallback: Data URL
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result) {
-          onChange(reader.result.toString());
-        }
-        setUploading(false);
-      };
-      reader.readAsDataURL(file);
+      setLastFailedFile(file);
+      applyDataUrlFallback(file);
       return;
     }
 
@@ -141,8 +146,19 @@ export function ImageUploader({
       </div>
 
       {error && (
-        <div className="p-2.5 rounded bg-red-50 dark:bg-red-950/40 border border-red-300 dark:border-red-800 text-red-800 dark:text-red-200 text-xs">
-          {error}
+        <div className="p-3 rounded bg-red-50 dark:bg-red-950/40 border border-red-300 dark:border-red-800 text-red-800 dark:text-red-200 text-xs space-y-2">
+          <p className="leading-relaxed">{error}</p>
+          {lastFailedFile && (
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() => applyDataUrlFallback()}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[var(--color-primary)] text-white hover:opacity-90 font-mono text-xs font-semibold cursor-pointer transition-opacity"
+              >
+                Gamitin pansamantala bilang Local Data URL
+              </button>
+            </div>
+          )}
         </div>
       )}
 
