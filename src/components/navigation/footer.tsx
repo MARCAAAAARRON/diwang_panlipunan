@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -8,9 +9,20 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pb-8 border-b border-border">
           {/* Brand Info */}
           <div className="md:col-span-7 space-y-3">
-            <h2 className="font-serif text-xl font-bold text-text tracking-tight">
-              Diwang Panlipunan
-            </h2>
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-7 h-7 shrink-0 overflow-hidden rounded">
+                <Image
+                  src="/images/LOGO.png"
+                  alt="Diwang Panlipunan Logo"
+                  width={28}
+                  height={28}
+                  className="object-contain w-full h-full"
+                />
+              </div>
+              <h2 className="font-serif text-xl font-bold text-text tracking-tight">
+                Diwang Panlipunan
+              </h2>
+            </div>
             <p className="text-sm font-medium text-text-muted italic">
               Diwang Panlipunan — Pag-unawa sa Lipunan, Pagmulat sa Kinabukasan.
             </p>

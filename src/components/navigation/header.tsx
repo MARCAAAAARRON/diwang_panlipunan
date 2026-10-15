@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, Home, Search, User } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { useDrawer } from "./drawer-context";
@@ -30,7 +31,7 @@ export function Header({ onOpenDrawer }: HeaderProps) {
     <>
       <header className="sticky top-0 z-40 w-full border-b border-border bg-surface shadow-none transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          {/* Left: Hamburger, Home icon, Brand Title */}
+          {/* Left: Hamburger, Home icon, Brand Title with Logo */}
           <div className="flex items-center gap-3 md:gap-4 shrink-0">
             <button
               type="button"
@@ -51,7 +52,17 @@ export function Header({ onOpenDrawer }: HeaderProps) {
               <Home className="w-5 h-5" />
             </Link>
 
-            <Link href="/" className="group flex flex-col">
+            <Link href="/" className="group flex items-center gap-2 sm:gap-2.5">
+              <div className="relative w-8 h-8 md:w-9 md:h-9 shrink-0 overflow-hidden rounded">
+                <Image
+                  src="/images/LOGO.png"
+                  alt="Diwang Panlipunan Logo"
+                  width={36}
+                  height={36}
+                  priority
+                  className="object-contain w-full h-full"
+                />
+              </div>
               <span className="font-serif text-lg md:text-xl font-bold text-text group-hover:text-primary transition-colors tracking-tight">
                 Diwang Panlipunan
               </span>

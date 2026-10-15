@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { X, ChevronDown, ChevronRight, Mail } from "lucide-react";
 import { useDrawer } from "./drawer-context";
@@ -88,9 +89,20 @@ export function ContentDrawer() {
       >
         {/* Drawer Header */}
         <div className="h-16 px-5 border-b border-border flex items-center justify-between shrink-0 bg-surface">
-          <h2 className="font-serif text-xl font-bold tracking-tight text-text">
-            Nilalaman
-          </h2>
+          <div className="flex items-center gap-2.5">
+            <div className="relative w-6 h-6 shrink-0 overflow-hidden rounded">
+              <Image
+                src="/images/LOGO.png"
+                alt="Diwang Panlipunan Logo"
+                width={24}
+                height={24}
+                className="object-contain w-full h-full"
+              />
+            </div>
+            <h2 className="font-serif text-xl font-bold tracking-tight text-text">
+              Nilalaman
+            </h2>
+          </div>
           <button
             type="button"
             onClick={closeDrawer}

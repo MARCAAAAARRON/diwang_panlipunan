@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { logoutAdmin } from "@/lib/auth-actions";
 import {
@@ -41,7 +42,17 @@ export default async function AdminDashboardLayout({
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo & Editorial Title */}
             <div className="flex items-center gap-3">
-              <Link href="/admin" className="flex items-center gap-2 group">
+              <Link href="/admin" className="flex items-center gap-2.5 group">
+                <div className="relative w-8 h-8 shrink-0 overflow-hidden rounded">
+                  <Image
+                    src="/images/LOGO.png"
+                    alt="Diwang Panlipunan Logo"
+                    width={32}
+                    height={32}
+                    priority
+                    className="object-contain w-full h-full"
+                  />
+                </div>
                 <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors">
                   DIWANG PANLIPUNAN
                 </span>
