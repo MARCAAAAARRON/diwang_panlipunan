@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { UploadCloud, Link as LinkIcon, X, Image as ImageIcon, Loader2 } from "lucide-react";
 
 interface ImageUploaderProps {
@@ -49,40 +48,41 @@ export function ImageUploader({
     setUploading(true);
 
     try {
-      const supabase = createClient();
-      const fileExt = file.name.split(".").pop();
-      const sanitizedName = file.name
-        .replace(/[^a-zA-Z0-9.-]/g, "_")
-        .toLowerCase();
-      const fileName = `${Date.now()}-${sanitizedName}`;
+      // 1. Upload to Cloudinary via server-side API route
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("folder", "diwang-panlipunan/banners");
 
-      const { data, error: uploadError } = await supabase.storage
-        .from(bucketName)
-        .upload(fileName, file, {
-          cacheControl: "3600",
-          upsert: true,
-        });
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
-      if (uploadError) {
-        // Fallback: Read as Data URL for local development/offline test
+      const data = await response.json();
+
+      if (response.ok && data.url) {
+        onChange(data.url);
+        setUploading(false);
+        return;
+      }
+
+      // If Cloudinary is unconfigured, provide local Data URL fallback for frictionless test
+      if (data.unconfigured) {
         const reader = new FileReader();
         reader.onload = () => {
           if (reader.result) {
             onChange(reader.result.toString());
-            setUploading(false);
           }
+          setUploading(false);
         };
         reader.readAsDataURL(file);
+        setError("Paunawa: Naka-load muna bilang lokal na Data URL dahil hindi pa naka-set ang CLOUDINARY credentials sa .env.local.");
         return;
       }
 
-      const { data: urlData } = supabase.storage
-        .from(bucketName)
-        .getPublicUrl(data.path);
-
-      onChange(urlData.publicUrl);
+      setError(data.error || "Pumalya ang pag-upload sa Cloudinary.");
     } catch {
-      // Fallback: Data URL
+      // Offline / network fallback: Data URL
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.result) {
