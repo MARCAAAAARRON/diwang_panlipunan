@@ -25,9 +25,16 @@ export default async function AdminTopicsPage() {
             Pamamahala ng mga Tematikong Paksa
           </h1>
           <p className="text-xs text-[var(--color-text-muted)] mt-1">
-            Pitong (7) pangunahing larangan ng lipunang Pilipino. I-edit ang mga pamagat, paglalarawan, at kaayusan.
+            Pangunahing mga larangan ng lipunang Pilipino. I-edit ang mga pamagat, paglalarawan, at kaayusan.
           </p>
         </div>
+
+        <Link
+          href="/admin/topics/new"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] text-xs font-semibold font-mono uppercase tracking-wider transition-colors shrink-0 shadow-none"
+        >
+          <span>+ Lumikha ng Bagong Paksa</span>
+        </Link>
       </div>
 
       {/* Topics List Table */}
