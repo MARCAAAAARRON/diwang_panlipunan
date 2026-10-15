@@ -45,6 +45,12 @@ export async function updateTopic(
       .eq("id", id);
 
     if (error) {
+      if ((error as any).code === "PGRST205" || error.message?.includes("schema cache")) {
+        return {
+          error:
+            "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor upang malikha ang mga talahanayan.",
+        };
+      }
       return { error: `Hindi na-save ang paksa: ${error.message}` };
     }
   } catch (err: any) {
@@ -76,6 +82,12 @@ export async function toggleTopicPublish(
       .eq("id", id);
 
     if (error) {
+      if ((error as any).code === "PGRST205" || error.message?.includes("schema cache")) {
+        return {
+          error:
+            "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor.",
+        };
+      }
       return { error: error.message };
     }
   } catch (err: any) {
