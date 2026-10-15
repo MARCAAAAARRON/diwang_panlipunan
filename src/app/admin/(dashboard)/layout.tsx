@@ -13,6 +13,7 @@ import {
   MessageSquare,
   Lightbulb,
   BarChart3,
+  Users,
 } from "lucide-react";
 
 export default async function AdminDashboardLayout({
@@ -21,17 +22,31 @@ export default async function AdminDashboardLayout({
   children: React.ReactNode;
 }) {
   let adminEmail = "Administrador";
+  let isAdmin = false;
 
   try {
     const supabase = await createClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (user?.email) {
-      adminEmail = user.email;
+
+    if (user) {
+      if (user.email) {
+        adminEmail = user.email;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      const p = profile as any;
+      isAdmin = p?.role === "admin" || user.user_metadata?.role === "admin";
     }
   } catch {
     // Local / fallback mode
+    isAdmin = true;
   }
 
   return (
@@ -136,13 +151,27 @@ export default async function AdminDashboardLayout({
               <span>Mga Mungkahi</span>
             </Link>
 
-            <Link
-              href="/admin/analytics"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
-            >
-              <BarChart3 className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
-              <span>Analytics</span>
-            </Link>
+            {/* Users Management Link (Only for Admin) */}
+            {isAdmin && (
+              <Link
+                href="/admin/users"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
+              >
+                <Users className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+                <span>Mga Gumagamit</span>
+              </Link>
+            )}
+
+            {/* Analytics (Only for Admin) */}
+            {isAdmin && (
+              <Link
+                href="/admin/analytics"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
+              >
+                <BarChart3 className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+                <span>Analytics</span>
+              </Link>
+            )}
           </nav>
         </div>
       </header>
