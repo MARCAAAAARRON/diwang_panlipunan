@@ -53,14 +53,17 @@ alter table public.suggestions enable row level security;
 -- -----------------------------------------------------------------------------
 -- 4. RLS Policies: Profiles
 -- -----------------------------------------------------------------------------
+drop policy if exists "Users can view their own profile or admin can view all" on public.profiles;
 create policy "Users can view their own profile or admin can view all"
   on public.profiles for select
   using (auth.uid() = id or public.is_admin());
 
+drop policy if exists "Admins can update any profile" on public.profiles;
 create policy "Admins can update any profile"
   on public.profiles for update
   using (public.is_admin());
 
+drop policy if exists "Users can update their own non-role profile fields" on public.profiles;
 create policy "Users can update their own non-role profile fields"
   on public.profiles for update
   using (auth.uid() = id)
@@ -69,18 +72,22 @@ create policy "Users can update their own non-role profile fields"
 -- -----------------------------------------------------------------------------
 -- 5. RLS Policies: Topics
 -- -----------------------------------------------------------------------------
+drop policy if exists "Anyone can view published topics or admin can view all" on public.topics;
 create policy "Anyone can view published topics or admin can view all"
   on public.topics for select
   using (is_published = true or public.is_admin());
 
+drop policy if exists "Only admins can insert topics" on public.topics;
 create policy "Only admins can insert topics"
   on public.topics for insert
   with check (public.is_admin());
 
+drop policy if exists "Only admins can update topics" on public.topics;
 create policy "Only admins can update topics"
   on public.topics for update
   using (public.is_admin());
 
+drop policy if exists "Only admins can delete topics" on public.topics;
 create policy "Only admins can delete topics"
   on public.topics for delete
   using (public.is_admin());
@@ -88,6 +95,7 @@ create policy "Only admins can delete topics"
 -- -----------------------------------------------------------------------------
 -- 6. RLS Policies: Subtopics
 -- -----------------------------------------------------------------------------
+drop policy if exists "Anyone can view published subtopics of published topics or admin" on public.subtopics;
 create policy "Anyone can view published subtopics of published topics or admin"
   on public.subtopics for select
   using (
@@ -100,14 +108,17 @@ create policy "Anyone can view published subtopics of published topics or admin"
     ) or public.is_admin()
   );
 
+drop policy if exists "Only admins can insert subtopics" on public.subtopics;
 create policy "Only admins can insert subtopics"
   on public.subtopics for insert
   with check (public.is_admin());
 
+drop policy if exists "Only admins can update subtopics" on public.subtopics;
 create policy "Only admins can update subtopics"
   on public.subtopics for update
   using (public.is_admin());
 
+drop policy if exists "Only admins can delete subtopics" on public.subtopics;
 create policy "Only admins can delete subtopics"
   on public.subtopics for delete
   using (public.is_admin());
@@ -115,6 +126,7 @@ create policy "Only admins can delete subtopics"
 -- -----------------------------------------------------------------------------
 -- 7. RLS Policies: Sources
 -- -----------------------------------------------------------------------------
+drop policy if exists "Anyone can view citations for published subtopics or admin" on public.sources;
 create policy "Anyone can view citations for published subtopics or admin"
   on public.sources for select
   using (
@@ -124,14 +136,17 @@ create policy "Anyone can view citations for published subtopics or admin"
     ) or public.is_admin()
   );
 
+drop policy if exists "Only admins can insert sources" on public.sources;
 create policy "Only admins can insert sources"
   on public.sources for insert
   with check (public.is_admin());
 
+drop policy if exists "Only admins can update sources" on public.sources;
 create policy "Only admins can update sources"
   on public.sources for update
   using (public.is_admin());
 
+drop policy if exists "Only admins can delete sources" on public.sources;
 create policy "Only admins can delete sources"
   on public.sources for delete
   using (public.is_admin());
@@ -139,14 +154,17 @@ create policy "Only admins can delete sources"
 -- -----------------------------------------------------------------------------
 -- 8. RLS Policies: Feedback
 -- -----------------------------------------------------------------------------
+drop policy if exists "Anyone can submit content feedback" on public.feedback;
 create policy "Anyone can submit content feedback"
   on public.feedback for insert
   with check (true);
 
+drop policy if exists "Only admins can view feedback" on public.feedback;
 create policy "Only admins can view feedback"
   on public.feedback for select
   using (public.is_admin());
 
+drop policy if exists "Only admins can delete feedback" on public.feedback;
 create policy "Only admins can delete feedback"
   on public.feedback for delete
   using (public.is_admin());
@@ -154,18 +172,22 @@ create policy "Only admins can delete feedback"
 -- -----------------------------------------------------------------------------
 -- 9. RLS Policies: Suggestions
 -- -----------------------------------------------------------------------------
+drop policy if exists "Anyone can submit topic suggestions" on public.suggestions;
 create policy "Anyone can submit topic suggestions"
   on public.suggestions for insert
   with check (true);
 
+drop policy if exists "Only admins can view suggestions" on public.suggestions;
 create policy "Only admins can view suggestions"
   on public.suggestions for select
   using (public.is_admin());
 
+drop policy if exists "Only admins can update suggestion status" on public.suggestions;
 create policy "Only admins can update suggestion status"
   on public.suggestions for update
   using (public.is_admin());
 
+drop policy if exists "Only admins can delete suggestions" on public.suggestions;
 create policy "Only admins can delete suggestions"
   on public.suggestions for delete
   using (public.is_admin());
