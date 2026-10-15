@@ -8,7 +8,6 @@ import {
   Menu,
   Home,
   Search,
-  User,
   LogOut,
   LayoutDashboard,
   BookOpen,
@@ -126,28 +125,32 @@ export function Header({ onOpenDrawer }: HeaderProps) {
     <>
       <header className="sticky top-0 z-40 w-full border-b border-border bg-surface shadow-none transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          {/* Left: Hamburger, Home icon, Brand Title with Logo */}
+          {/* Left: Brand Logo & Title (Hamburger & Home icon are ONLY visible when logged in) */}
           <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-            <button
-              type="button"
-              onClick={handleHamburgerClick}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-              aria-label="Buksan ang Nilalaman"
-              title="Buksan ang Nilalaman"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
+            {user && (
+              <>
+                <button
+                  type="button"
+                  onClick={handleHamburgerClick}
+                  className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
+                  aria-label="Buksan ang Nilalaman"
+                  title="Buksan ang Nilalaman"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
 
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary transition-colors"
-              aria-label="Pangunahing Pahina"
-              title="Pangunahing Pahina"
-            >
-              <Home className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Link>
+                <Link
+                  href="/home"
+                  className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary transition-colors"
+                  aria-label="Pangunahing Pahina"
+                  title="Pangunahing Pahina"
+                >
+                  <Home className="w-4 h-4 sm:w-5 sm:h-5" />
+                </Link>
+              </>
+            )}
 
-            <Link href="/" className="group flex items-center gap-2 sm:gap-2.5">
+            <Link href={user ? "/home" : "/"} className="group flex items-center gap-2 sm:gap-2.5">
               <div className="relative w-8 h-8 md:w-9 md:h-9 shrink-0 overflow-hidden rounded">
                 <Image
                   src="/images/LOGO.png"
@@ -164,39 +167,43 @@ export function Header({ onOpenDrawer }: HeaderProps) {
             </Link>
           </div>
 
-          {/* Center: Search Input Bar (Desktop) */}
-          <div className="flex-1 max-w-md hidden md:block">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
-                <Search className="w-4 h-4" />
-              </div>
-              <input
-                type="text"
-                readOnly
-                onClick={handleOpenSearch}
-                placeholder="Maghanap ng mga paksa at artikulo..."
-                className="w-full h-10 pl-10 pr-12 rounded-md border border-input-border bg-page text-sm text-text placeholder:text-text-muted cursor-pointer hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
-                aria-label="Maghanap ng mga paksa"
-              />
-              <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
-                <kbd className="px-1.5 py-0.5 text-xs font-mono font-medium tracking-[0.06em] text-text-muted bg-surface border border-border rounded">
-                  ⌘K
-                </kbd>
+          {/* Center: Search Input Bar (Desktop) - ONLY visible when logged in */}
+          {user && (
+            <div className="flex-1 max-w-md hidden md:block">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
+                  <Search className="w-4 h-4" />
+                </div>
+                <input
+                  type="text"
+                  readOnly
+                  onClick={handleOpenSearch}
+                  placeholder="Maghanap ng mga paksa at artikulo..."
+                  className="w-full h-10 pl-10 pr-12 rounded-md border border-input-border bg-page text-sm text-text placeholder:text-text-muted cursor-pointer hover:border-primary focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                  aria-label="Maghanap ng mga paksa"
+                />
+                <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+                  <kbd className="px-1.5 py-0.5 text-xs font-mono font-medium tracking-[0.06em] text-text-muted bg-surface border border-border rounded">
+                    ⌘K
+                  </kbd>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Right: Mobile search trigger, Theme Toggle & User Auth */}
+          {/* Right: Mobile search trigger (only if user), Theme Toggle & User Auth */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <button
-              type="button"
-              onClick={handleOpenSearch}
-              className="md:hidden inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-              aria-label="Maghanap"
-              title="Maghanap"
-            >
-              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
+            {user && (
+              <button
+                type="button"
+                onClick={handleOpenSearch}
+                className="md:hidden inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-md border border-border bg-surface text-text hover:border-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
+                aria-label="Maghanap"
+                title="Maghanap"
+              >
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            )}
 
             <ThemeToggle />
 
@@ -297,7 +304,7 @@ export function Header({ onOpenDrawer }: HeaderProps) {
               <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="hidden sm:inline-flex items-center justify-center h-9 sm:h-10 px-3.5 rounded-md border border-border bg-surface text-text hover:border-primary hover:text-primary font-medium text-xs sm:text-sm transition-colors"
+                  className="inline-flex items-center justify-center h-9 sm:h-10 px-3.5 rounded-md border border-border bg-surface text-text hover:border-primary hover:text-primary font-medium text-xs sm:text-sm transition-colors"
                 >
                   Mag-login
                 </Link>
@@ -313,7 +320,7 @@ export function Header({ onOpenDrawer }: HeaderProps) {
           </div>
         </div>
       </header>
-      <SearchModal />
+      {user && <SearchModal />}
     </>
   );
 }
