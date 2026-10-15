@@ -152,16 +152,17 @@ export default function LandingPage() {
               <div className="rounded-md border border-border bg-surface p-2 sm:p-3 space-y-3">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-border">
                   <Image
-                    src="/images/hero-documentation.svg"
-                    alt="Mga mag-aaral at mananaliksik sa isang bukas na talakayan ukol sa lipunang Pilipino"
+                    src="/images/small-group-planning.jpg"
+                    alt="Mga mag-aaral at kabataang mananaliksik sa isang sama-samang pagpaplano at bukas na talakayan ukol sa lipunang Pilipino"
                     fill
                     priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
                     className="object-cover"
                   />
                 </div>
                 <div className="px-1.5 space-y-2">
                   <p className="text-xs sm:text-sm italic text-text-muted leading-snug">
-                    &ldquo;Mga mag-aaral at mananaliksik sa isang bukas na talakayan ukol sa kasaysayan at lipunang Pilipino.&rdquo;
+                    &ldquo;Mga mag-aaral at kabataang mananaliksik sa isang sama-samang pagpaplano at bukas na talakayan ukol sa lipunang Pilipino.&rdquo;
                   </p>
                   <div className="flex items-center justify-between text-xs font-semibold tracking-[0.06em] text-text-muted uppercase border-t border-border pt-2">
                     <span>DOKUMENTASYON</span>
