@@ -73,7 +73,7 @@ export async function updateSession(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // Verify admin role in profiles
+    // Verify admin role in profiles (with metadata / email fallback)
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -81,7 +81,12 @@ export async function updateSession(request: NextRequest) {
       .single();
 
     const p = profile as any;
-    if (!p || p.role !== "admin") {
+    const isExplicitAdmin =
+      (p && p.role === "admin") ||
+      user.user_metadata?.role === "admin" ||
+      user.email === "admin@diwangpanlipunan.ph";
+
+    if (!isExplicitAdmin) {
       const url = request.nextUrl.clone();
       url.pathname = "/admin/login";
       url.searchParams.set("error", "unauthorized");
@@ -103,7 +108,12 @@ export async function updateSession(request: NextRequest) {
         .single();
 
       const p = profile as any;
-      if (p && p.role === "admin") {
+      const isExplicitAdmin =
+        (p && p.role === "admin") ||
+        user.user_metadata?.role === "admin" ||
+        user.email === "admin@diwangpanlipunan.ph";
+
+      if (isExplicitAdmin) {
         const nextPath = request.nextUrl.searchParams.get("next") || "/admin";
         const url = request.nextUrl.clone();
         url.pathname = nextPath;

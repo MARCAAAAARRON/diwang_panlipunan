@@ -38,7 +38,7 @@ export async function loginAdmin(
       };
     }
 
-    // Verify admin role in profiles
+    // Verify admin role in profiles (with metadata / email fallback)
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("role")
@@ -46,7 +46,12 @@ export async function loginAdmin(
       .single();
 
     const p = profile as any;
-    if (profileError || !p || p.role !== "admin") {
+    const isExplicitAdmin =
+      (p && p.role === "admin") ||
+      data.user.user_metadata?.role === "admin" ||
+      data.user.email === "admin@diwangpanlipunan.ph";
+
+    if (!isExplicitAdmin) {
       // Invalidate session if not an admin
       await supabase.auth.signOut();
       return {
