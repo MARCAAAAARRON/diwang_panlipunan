@@ -31,3 +31,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local planning and agent tooling
+.planning/
+.impeccable/
+.agent/
+docs/
+*.log
+
