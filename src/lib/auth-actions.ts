@@ -58,16 +58,32 @@ export async function loginUser(
       .single();
 
     const p = profile as any;
-    userRole = (p?.role as UserRole) || (data.user.user_metadata?.role as UserRole) || "viewer";
+    const rawRole = p?.role || data.user.user_metadata?.role;
+    userRole =
+      rawRole === "admin"
+        ? "admin"
+        : rawRole === "editor"
+        ? "editor"
+        : "viewer";
 
     // Ensure profile row exists
     if (!profile) {
-      await (supabase.from("profiles") as any).upsert({
+      const { error: profileError } = await (supabase.from("profiles") as any).upsert({
         id: data.user.id,
         email: data.user.email || email,
         full_name: data.user.user_metadata?.full_name || null,
         role: userRole,
       });
+
+      if (profileError && profileError.message.includes("profiles_role_check")) {
+        // Fallback for databases before constraint expansion
+        await (supabase.from("profiles") as any).upsert({
+          id: data.user.id,
+          email: data.user.email || email,
+          full_name: data.user.user_metadata?.full_name || null,
+          role: userRole === "admin" ? "admin" : "user",
+        });
+      }
     }
   } catch (err: any) {
     return {
@@ -85,12 +101,12 @@ export async function loginUser(
   } else if (userRole === "editor") {
     redirect("/admin/subtopics");
   } else {
-    redirect("/topics");
+    redirect("/home");
   }
 }
 
 /**
- * Universal Registration Server Action: Signs up a new Citizen / Reader (Viewer role)
+ * Universal Registration Server Action: Signs up a new Citizen / Reader
  */
 export async function registerUser(
   prevState: AuthState | null,
@@ -141,20 +157,30 @@ export async function registerUser(
     }
 
     if (data.user) {
-      // Ensure profile row is recorded in public.profiles table
-      await (supabase.from("profiles") as any).upsert({
+      // Try upserting with 'viewer' role first
+      const { error: profileError } = await (supabase.from("profiles") as any).upsert({
         id: data.user.id,
         email,
         full_name: fullName,
         role: "viewer",
       });
+
+      // Fallback to 'user' if profiles_role_check has not been updated yet
+      if (profileError && profileError.message.includes("profiles_role_check")) {
+        await (supabase.from("profiles") as any).upsert({
+          id: data.user.id,
+          email,
+          full_name: fullName,
+          role: "user",
+        });
+      }
     }
 
     // If session was not immediately returned (email confirmation required)
     if (!data.session) {
       return {
         success: true,
-        message: "Nilikha na ang iyong account! Mangyaring suriin ang iyong email para sa beripikasyon, o mag-login.",
+        message: "Nilikha na ang iyong account! Maaari ka nang mag-login gamit ang iyong email at password.",
       };
     }
   } catch (err: any) {
@@ -163,7 +189,7 @@ export async function registerUser(
     };
   }
 
-  const destination = nextParam && nextParam.startsWith("/") ? nextParam : "/topics";
+  const destination = nextParam && nextParam.startsWith("/") ? nextParam : "/home";
   redirect(destination);
 }
 
@@ -186,11 +212,19 @@ export async function getCurrentUser(): Promise<CurrentUserProfile | null> {
       .single();
 
     const p = profile as any;
+    const rawRole = p?.role || user.user_metadata?.role;
+    const normalizedRole: UserRole =
+      rawRole === "admin"
+        ? "admin"
+        : rawRole === "editor"
+        ? "editor"
+        : "viewer";
+
     return {
       id: user.id,
       email: user.email || "",
       full_name: p?.full_name || user.user_metadata?.full_name || null,
-      role: (p?.role as UserRole) || (user.user_metadata?.role as UserRole) || "viewer",
+      role: normalizedRole,
       avatar_url: p?.avatar_url || null,
     };
   } catch {

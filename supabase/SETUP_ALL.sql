@@ -19,7 +19,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text not null,
   full_name text,
-  role text not null default 'user' check (role in ('admin', 'user')),
+  role text not null default 'viewer' check (role in ('admin', 'editor', 'viewer', 'user')),
   avatar_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

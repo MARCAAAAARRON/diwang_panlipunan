@@ -124,6 +124,12 @@ export async function updateUserRole(
       .eq("id", targetUserId);
 
     if (updateError) {
+      if (updateError.message.includes("profiles_role_check")) {
+        return {
+          success: false,
+          error: "Pakipatupad ang migration sa Supabase SQL Editor upang payagan ang 'editor' at 'viewer' sa profiles_role_check.",
+        };
+      }
       return { success: false, error: updateError.message };
     }
 
