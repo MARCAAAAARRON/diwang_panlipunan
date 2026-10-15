@@ -101,7 +101,7 @@ export default async function AdminDashboardLayout({
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]"
             >
               <LayoutDashboard className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
-              <span>Pangkalahatan</span>
+              <span>Dashboard</span>
             </Link>
 
             <Link
