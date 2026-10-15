@@ -60,20 +60,14 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  // Protect /admin routes (except /admin/login)
-  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+  // Retrieve authenticated session user
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-    if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/admin/login";
-      url.searchParams.set("next", pathname);
-      return NextResponse.redirect(url);
-    }
-
-    // Verify admin role in profiles (with metadata / email fallback)
+  // If user is authenticated, retrieve their role
+  let userRole: "admin" | "editor" | "viewer" = "viewer";
+  if (user) {
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -81,44 +75,89 @@ export async function updateSession(request: NextRequest) {
       .single();
 
     const p = profile as any;
-    const isExplicitAdmin =
-      (p && p.role === "admin") ||
-      user.user_metadata?.role === "admin";
+    userRole =
+      (p?.role as "admin" | "editor" | "viewer") ||
+      (user.user_metadata?.role as "admin" | "editor" | "viewer") ||
+      "viewer";
+  }
 
-    if (!isExplicitAdmin) {
+  // 1. If visiting /login or /register while already authenticated:
+  if (pathname === "/login" || pathname === "/register") {
+    if (user) {
+      const nextParam = request.nextUrl.searchParams.get("next");
+      if (nextParam && nextParam.startsWith("/") && nextParam !== "/login" && nextParam !== "/register") {
+        const url = request.nextUrl.clone();
+        url.pathname = nextParam;
+        url.searchParams.delete("next");
+        return NextResponse.redirect(url);
+      }
+
       const url = request.nextUrl.clone();
-      url.pathname = "/admin/login";
-      url.searchParams.set("error", "unauthorized");
+      if (userRole === "admin") {
+        url.pathname = "/admin";
+      } else if (userRole === "editor") {
+        url.pathname = "/admin/subtopics";
+      } else {
+        url.pathname = "/home";
+      }
       return NextResponse.redirect(url);
     }
   }
 
-  // If visiting /admin/login while already authenticated as admin, redirect to /admin
+  // 2. Protect /admin routes (except /admin/login)
+  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
+    if (!user) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("next", pathname);
+      return NextResponse.redirect(url);
+    }
+
+    // Role check: Only admin and editor are allowed in /admin
+    if (userRole !== "admin" && userRole !== "editor") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/home";
+      return NextResponse.redirect(url);
+    }
+
+    // If editor tries to access user management, redirect to subtopics
+    if (userRole === "editor" && pathname.startsWith("/admin/users")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/admin/subtopics";
+      return NextResponse.redirect(url);
+    }
+  }
+
+  // 3. If visiting /admin/login while already authenticated as admin/editor:
   if (pathname === "/admin/login") {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
     if (user) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-
-      const p = profile as any;
-      const isExplicitAdmin =
-        (p && p.role === "admin") ||
-        user.user_metadata?.role === "admin";
-
-      if (isExplicitAdmin) {
-        const nextPath = request.nextUrl.searchParams.get("next") || "/admin";
+      if (userRole === "admin" || userRole === "editor") {
+        const nextPath = request.nextUrl.searchParams.get("next") || (userRole === "admin" ? "/admin" : "/admin/subtopics");
         const url = request.nextUrl.clone();
         url.pathname = nextPath;
         url.searchParams.delete("next");
         return NextResponse.redirect(url);
+      } else {
+        // Viewer visiting /admin/login -> redirect to /home
+        const url = request.nextUrl.clone();
+        url.pathname = "/home";
+        return NextResponse.redirect(url);
       }
     }
+  }
+
+  // 4. Access-gate reading / content routes for unauthenticated guests:
+  // /home, /topics, /topics/*, /magmungkahi
+  const isProtectedReadingRoute =
+    pathname === "/home" ||
+    pathname.startsWith("/topics") ||
+    pathname === "/magmungkahi";
+
+  if (isProtectedReadingRoute && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.searchParams.set("next", pathname);
+    return NextResponse.redirect(url);
   }
 
   return response;

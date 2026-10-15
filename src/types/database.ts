@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export type UserRole = "admin" | "user";
+export type UserRole = "admin" | "editor" | "viewer" | "user";
 export type SuggestionStatus = "pending" | "in_review" | "implemented" | "dismissed";
 
 export interface Database {

@@ -1,17 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronRight, Send, CheckCircle2, AlertCircle, BookOpen, Sparkles, Loader2 } from "lucide-react";
+import { ChevronRight, Send, CheckCircle2, AlertCircle, BookOpen, Sparkles, Loader2, Lock, UserCheck } from "lucide-react";
 import { submitTopicSuggestion, type SuggestionActionState } from "@/lib/suggestion-actions";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SuggestionPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formState, setFormState] = useState<SuggestionActionState>({ success: false });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{ email: string; fullName: string | null } | null>(null);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
+
+  useEffect(() => {
+    try {
+      const supabase = createClient();
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user) {
+          setCurrentUser({
+            email: session.user.email || "",
+            fullName: session.user.user_metadata?.full_name || null,
+          });
+        } else {
+          setCurrentUser(null);
+        }
+        setIsLoadingAuth(false);
+      });
+    } catch {
+      setCurrentUser(null);
+      setIsLoadingAuth(false);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!currentUser) return;
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
 
@@ -42,7 +66,7 @@ export default function SuggestionPage() {
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[var(--color-text-muted)]">
           <Link href="/" className="hover:text-[var(--color-primary)] transition-colors">
-            Pangunahin
+            Tahanan
           </Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-[var(--color-text)] font-medium">Magmungkahi</span>
@@ -61,6 +85,48 @@ export default function SuggestionPage() {
             Ang Diwang Panlipunan ay bukas sa mga panukalang aralin, pagsusuri sa datos, at pagsisiyasat sa mga suliraning kinakaharap ng mga pamayanang Pilipino. Ang inyong mga mungkahi ay direktang sinusuri ng aming lupon ng patnugutan.
           </p>
         </header>
+
+        {/* Unauthenticated User Warning */}
+        {!isLoadingAuth && !currentUser && (
+          <div className="p-6 rounded-md border border-[#0D7B48]/30 bg-[#0D7B48]/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <Lock className="w-5 h-5 text-[#0D7B48] shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <h2 className="text-sm font-bold text-text">Kailangan ng Login para sa Mungkahi</h2>
+                <p className="text-xs text-text-muted">
+                  Upang mapanatili ang integridad ng diskursong sibiko, tanging mga rehistradong miyembro lamang ang maaaring magpadala ng mungkahi.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <Link
+                href="/login?next=/magmungkahi"
+                className="px-4 py-2 rounded-md bg-[#0D7B48] text-white hover:bg-[#0A633A] text-xs font-semibold transition-colors"
+              >
+                Mag-login
+              </Link>
+              <Link
+                href="/register?next=/magmungkahi"
+                className="px-4 py-2 rounded-md border border-border bg-surface text-text hover:border-[#0D7B48] text-xs font-semibold transition-colors"
+              >
+                Mag-register
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* Authenticated user indicator */}
+        {currentUser && (
+          <div className="p-3.5 rounded-md border border-border bg-surface flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2 text-text">
+              <UserCheck className="w-4 h-4 text-[#0D7B48]" />
+              <span>
+                Naka-login bilang: <strong className="font-semibold">{currentUser.fullName || currentUser.email}</strong>
+              </span>
+            </div>
+            <span className="text-[11px] font-mono text-[#0D7B48] font-semibold uppercase">Rehistradong Mambabasa</span>
+          </div>
+        )}
 
         {/* Editorial Guidance Notice */}
         <div className="p-5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] space-y-3">
@@ -105,7 +171,7 @@ export default function SuggestionPage() {
               </button>
               <Link
                 href="/home"
-                className="w-full sm:w-auto px-5 py-2.5 rounded-md bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-semibold transition-colors text-center"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-md bg-[#0D7B48] hover:bg-[#0A633A] text-white text-xs font-semibold transition-colors text-center"
               >
                 Bumalik sa Portal Feed
               </Link>
@@ -127,7 +193,7 @@ export default function SuggestionPage() {
               </div>
             )}
 
-            {/* Anti-spam Honeypot Field (Hidden from real users) */}
+            {/* Anti-spam Honeypot Field */}
             <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
               <label htmlFor="website_url_hp">Website URL (Huwag punan kung tao ka)</label>
               <input
@@ -151,7 +217,7 @@ export default function SuggestionPage() {
                 required
                 maxLength={150}
                 placeholder="Halimbawa: Ang Epekto ng Jeepney Modernization sa mga Mananakay at Tsuper"
-                className="w-full h-11 px-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
+                className="w-full h-11 px-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[#0D7B48] focus:border-[#0D7B48]"
               />
               {formState.errors?.title && (
                 <p className="text-[11px] text-red-600 dark:text-red-400">{formState.errors.title[0]}</p>
@@ -170,7 +236,7 @@ export default function SuggestionPage() {
                 rows={4}
                 maxLength={1500}
                 placeholder="Ilarawan ang kasalukuyang kalagayan ng paksang ito. Bakit mahalagang magkaroon ng komprehensibong aralin ukol dito sa Diwang Panlipunan?"
-                className="w-full p-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] leading-relaxed"
+                className="w-full p-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[#0D7B48] focus:border-[#0D7B48] leading-relaxed"
               />
               <p className="text-[11px] text-[var(--color-text-muted)]">
                 Hindi bababa sa 20 titik.
@@ -191,14 +257,14 @@ export default function SuggestionPage() {
                 rows={3}
                 maxLength={1000}
                 placeholder="Mga ulat mula sa PSA, PIDS, mga balita, batas, o pananaliksik na maaring gamitin ng aming manunulat..."
-                className="w-full p-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] leading-relaxed"
+                className="w-full p-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[#0D7B48] focus:border-[#0D7B48] leading-relaxed"
               />
               {formState.errors?.rationale && (
                 <p className="text-[11px] text-red-600 dark:text-red-400">{formState.errors.rationale[0]}</p>
               )}
             </div>
 
-            {/* Field 4: Contact Email (Optional) */}
+            {/* Field 4: Contact Email (Optional or prefilled) */}
             <div className="space-y-1.5">
               <label htmlFor="contact_email" className="block font-medium text-xs text-[var(--color-text)]">
                 Email Address <span className="text-[var(--color-text-muted)] font-normal">(Opsyonal)</span>
@@ -207,8 +273,9 @@ export default function SuggestionPage() {
                 type="email"
                 id="contact_email"
                 name="contact_email"
+                defaultValue={currentUser?.email || ""}
                 placeholder="halimbawa@email.com"
-                className="w-full h-11 px-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
+                className="w-full h-11 px-3.5 rounded-md border border-[var(--color-input-border)] bg-[var(--color-page)] text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-1 focus:ring-[#0D7B48] focus:border-[#0D7B48]"
               />
               <p className="text-[11px] text-[var(--color-text-muted)]">
                 Gagamitin lamang upang ipagbigay-alam sa iyo kung nailathala na ang aralin. Hindi ito ibabahagi sa publiko.
@@ -228,8 +295,8 @@ export default function SuggestionPage() {
               </Link>
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[var(--color-primary)] text-[var(--color-primary-contrast)] font-medium text-xs hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 transition-all disabled:opacity-50"
+                disabled={isSubmitting || !currentUser}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#0D7B48] text-white font-semibold text-xs hover:bg-[#0A633A] focus:outline-none focus:ring-2 focus:ring-[#0D7B48] focus:ring-offset-2 transition-all disabled:opacity-50 cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
