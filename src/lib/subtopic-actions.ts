@@ -82,6 +82,7 @@ export async function createSubtopic(
     revalidatePath("/topics");
     revalidatePath("/admin");
     revalidatePath("/admin/subtopics");
+    revalidatePath("/", "layout");
 
     return {
       success: true,
@@ -166,6 +167,7 @@ export async function updateSubtopic(
     revalidatePath("/topics");
     revalidatePath("/admin");
     revalidatePath("/admin/subtopics");
+    revalidatePath("/", "layout");
 
     return {
       success: true,

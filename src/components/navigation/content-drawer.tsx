@@ -1,17 +1,40 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { X, ChevronDown, ChevronRight, Mail } from "lucide-react";
 import { useDrawer } from "./drawer-context";
 import { CANONICAL_TOPICS } from "@/lib/navigation-data";
+import { DrawerTopicItem } from "@/types/navigation";
 
 export function ContentDrawer() {
   const { isOpen, closeDrawer, activeTopicSlug, setActiveTopicSlug } = useDrawer();
   const pathname = usePathname();
   const drawerRef = useRef<HTMLDivElement>(null);
+  const [topics, setTopics] = useState<DrawerTopicItem[]>(CANONICAL_TOPICS);
+
+  // Dynamically synchronize live database topics & published articles whenever drawer is opened
+  useEffect(() => {
+    if (!isOpen) return;
+
+    let isMounted = true;
+    fetch("/api/navigation")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (isMounted && data?.topics && Array.isArray(data.topics)) {
+          setTopics(data.topics);
+        }
+      })
+      .catch(() => {
+        // Fallback gracefully to current topics state
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isOpen]);
 
   // Close on Escape key
   useEffect(() => {
@@ -116,7 +139,7 @@ export function ContentDrawer() {
 
         {/* Scrollable Topics & Subtopics List */}
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
-          {CANONICAL_TOPICS.map((topic) => {
+          {topics.map((topic) => {
             const isExpanded = activeTopicSlug === topic.slug;
 
             return (
