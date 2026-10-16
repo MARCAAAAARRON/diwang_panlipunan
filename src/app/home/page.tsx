@@ -1,10 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, CheckCircle2, ShieldCheck, FileText, Check } from "lucide-react";
-import { CANONICAL_TOPICS } from "@/lib/navigation-data";
+import { getAllTopics } from "@/lib/content-service";
 
-export default function HomePage() {
-  const featuredTopic = CANONICAL_TOPICS[0];
+export default async function HomePage() {
+  const topics = await getAllTopics();
+  const featuredTopic = topics[0];
+  const featuredSubtopic = featuredTopic?.subtopics?.[0];
+  const featuredHref = featuredSubtopic
+    ? `/topics/${featuredTopic.slug}/${featuredSubtopic.slug}`
+    : featuredTopic
+    ? `/topics/${featuredTopic.slug}`
+    : "/topics";
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -27,36 +34,38 @@ export default function HomePage() {
       </div>
 
       {/* Featured Topic Banner (Tampok na Paksa) */}
-      <section className="relative rounded-md border border-border bg-[#14231B] text-[#EAF3EC] p-6 sm:p-10 overflow-hidden shadow-none">
-        <div className="relative z-10 space-y-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-white/10 text-xs font-mono font-semibold tracking-wider uppercase text-[#E3F0AF]">
-            <span>TAMPOK NA PAKSA • DISKURSO 01</span>
-          </div>
+      {featuredTopic && (
+        <section className="relative rounded-md border border-border bg-[#14231B] text-[#EAF3EC] p-6 sm:p-10 overflow-hidden shadow-none">
+          <div className="relative z-10 space-y-4 max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-white/10 text-xs font-mono font-semibold tracking-wider uppercase text-[#E3F0AF]">
+              <span>TAMPOK NA PAKSA • DISKURSO 01</span>
+            </div>
 
-          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-            {featuredTopic.title}
-          </h1>
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+              {featuredTopic.name_fil}
+            </h1>
 
-          <p className="text-sm sm:text-base text-[#C5D9CA] leading-relaxed max-w-2xl">
-            {featuredTopic.description}
-          </p>
+            <p className="text-sm sm:text-base text-[#C5D9CA] leading-relaxed max-w-2xl">
+              {featuredTopic.description_fil}
+            </p>
 
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            <Link
-              href={`/topics/${featuredTopic.slug}/${featuredTopic.subtopics[1].slug}`}
-              className="inline-flex items-center gap-2 h-10 px-5 rounded-md bg-[#5DB996] text-[#092328] font-semibold text-sm hover:bg-[#8BBB92] transition-colors"
-            >
-              <span>Basahin ang Aralin</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <Link
+                href={featuredHref}
+                className="inline-flex items-center gap-2 h-10 px-5 rounded-md bg-[#5DB996] text-[#092328] font-semibold text-sm hover:bg-[#8BBB92] transition-colors"
+              >
+                <span>{featuredSubtopic ? "Basahin ang Aralin" : "Tingnan ang Paksa"}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
 
-            <div className="inline-flex items-center gap-1.5 text-xs text-[#C5D9CA]">
-              <Clock className="w-3.5 h-3.5" />
-              <span>12 minutong pagbasa</span>
+              <div className="inline-flex items-center gap-1.5 text-xs text-[#C5D9CA]">
+                <Clock className="w-3.5 h-3.5" />
+                <span>{featuredSubtopic?.read_time_minutes || 6} minutong pagbasa</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Editorial Orientation Note (Panimulang Gabay) */}
       <section className="p-6 sm:p-8 rounded-md border border-border bg-surface space-y-5">
@@ -109,39 +118,47 @@ export default function HomePage() {
             </h2>
           </div>
           <span className="text-xs font-mono font-semibold text-text-muted">
-            Kabuuang {CANONICAL_TOPICS.length} Paksang Aralin
+            Kabuuang {topics.length} Paksang Aralin
           </span>
         </div>
 
         <div className="divide-y divide-border">
-          {CANONICAL_TOPICS.map((topic) => (
-            <div
-              key={topic.id}
-              className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
-            >
-              <div className="flex items-start sm:items-center gap-4 min-w-0">
-                <span className="font-mono text-base font-bold text-primary shrink-0">
-                  {topic.number}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="font-serif text-base sm:text-lg font-bold text-text group-hover:text-primary transition-colors">
-                    {topic.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-text-muted truncate max-w-2xl">
-                    {topic.description}
-                  </p>
-                </div>
-              </div>
+          {topics.map((topic, index) => {
+            const sequenceNum = String(topic.order_index || index + 1).padStart(2, "0");
+            const firstSubtopic = topic.subtopics?.[0];
+            const href = firstSubtopic
+              ? `/topics/${topic.slug}/${firstSubtopic.slug}`
+              : `/topics/${topic.slug}`;
 
-              <Link
-                href={`/topics/${topic.slug}/${topic.subtopics[0].slug}`}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-hover shrink-0 self-end sm:self-auto"
+            return (
+              <div
+                key={topic.id}
+                className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
               >
-                <span>Tingnan ang mga aralin</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          ))}
+                <div className="flex items-start sm:items-center gap-4 min-w-0">
+                  <span className="font-mono text-base font-bold text-primary shrink-0">
+                    {sequenceNum}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-serif text-base sm:text-lg font-bold text-text group-hover:text-primary transition-colors">
+                      {topic.name_fil}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-text-muted truncate max-w-2xl">
+                      {topic.description_fil}
+                    </p>
+                  </div>
+                </div>
+
+                <Link
+                  href={href}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary-hover shrink-0 self-end sm:self-auto"
+                >
+                  <span>{firstSubtopic ? "Tingnan ang mga aralin" : "Tingnan ang paksa"}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </section>
 

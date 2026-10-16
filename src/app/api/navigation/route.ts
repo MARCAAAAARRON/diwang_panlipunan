@@ -1,68 +1,56 @@
 import { NextResponse } from "next/server";
 import { getAllTopics } from "@/lib/content-service";
-import { CANONICAL_TOPICS } from "@/lib/navigation-data";
 import { DrawerTopicItem, DrawerSubtopicItem } from "@/types/navigation";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET() {
   try {
     const dbTopics = await getAllTopics();
 
-    // Merge DB subtopics into canonical structure so newly created admin articles immediately appear
-    const mergedTopics: DrawerTopicItem[] = CANONICAL_TOPICS.map((canonical) => {
-      const dbTopic = dbTopics.find((t) => t.slug === canonical.slug);
-      if (!dbTopic || !dbTopic.subtopics || dbTopic.subtopics.length === 0) {
-        return canonical;
-      }
+    // Map strictly what is present in the database / system
+    const topics: DrawerTopicItem[] = (dbTopics || []).map((topic, index) => {
+      const sequenceNum = String(topic.order_index || index + 1).padStart(2, "0");
 
-      // Collect existing canonical subtopics by slug
-      const subtopicMap = new Map<string, DrawerSubtopicItem>();
-      canonical.subtopics.forEach((s) => {
-        subtopicMap.set(s.slug, { ...s });
-      });
+      const publishedSubtopics = (topic.subtopics || []).filter(
+        (s) => s.is_published !== false
+      );
 
-      // Overlay or append published DB subtopics
-      const publishedDbSubtopics = dbTopic.subtopics.filter((s) => s.is_published);
-      publishedDbSubtopics.forEach((dbSub) => {
-        if (subtopicMap.has(dbSub.slug)) {
-          const existing = subtopicMap.get(dbSub.slug)!;
-          subtopicMap.set(dbSub.slug, {
-            ...existing,
-            title: dbSub.title,
-          });
-        } else {
-          subtopicMap.set(dbSub.slug, {
-            id: dbSub.id,
-            code: "",
-            title: dbSub.title,
-            slug: dbSub.slug,
-          });
-        }
-      });
-
-      // Format subtopics with clean Aralin numbering and codes (a., b., c., etc.)
-      const subtopicsList: DrawerSubtopicItem[] = Array.from(subtopicMap.values()).map(
-        (sub, index) => {
-          const letter = String.fromCharCode(97 + (index % 26)) + ".";
+      const subtopicsList: DrawerSubtopicItem[] = publishedSubtopics.map(
+        (sub, subIndex) => {
+          const letter = String.fromCharCode(97 + (subIndex % 26)) + ".";
           const cleanTitle = sub.title.replace(/^Aralin\s+\d+:\s*/i, "").trim();
           return {
-            id: sub.id || `subtopic-${canonical.number}-${letter}`,
+            id: sub.id || `subtopic-${sequenceNum}-${letter}`,
             code: letter,
-            title: `Aralin ${index + 1}: ${cleanTitle}`,
+            title: `Aralin ${subIndex + 1}: ${cleanTitle}`,
             slug: sub.slug,
           };
         }
       );
 
       return {
-        ...canonical,
+        id: topic.id || `topic-${sequenceNum}`,
+        number: sequenceNum,
+        slug: topic.slug,
+        title: topic.name_fil,
+        description: topic.description_fil || "",
+        themeColor: topic.color_token ? `var(${topic.color_token})` : "var(--color-primary)",
         subtopics: subtopicsList,
       };
     });
 
-    return NextResponse.json({ topics: mergedTopics });
-  } catch {
-    return NextResponse.json({ topics: CANONICAL_TOPICS });
+    return NextResponse.json(
+      { topics },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
+      }
+    );
+  } catch (err: any) {
+    console.error("Navigation API error:", err?.message);
+    return NextResponse.json({ topics: [] }, { status: 500 });
   }
 }

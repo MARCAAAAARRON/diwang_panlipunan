@@ -89,46 +89,57 @@ export default async function TopicHubPage({ params }: TopicPageProps) {
           </span>
         </div>
 
-        <div className="space-y-4">
-          {topic.subtopics.map((subtopic, index) => {
-            const letterCode = String.fromCharCode(97 + index) + ".";
+        {!topic.subtopics || topic.subtopics.length === 0 ? (
+          <div className="p-10 rounded-md border border-border bg-surface text-center space-y-2">
+            <p className="font-serif text-base font-bold text-text">
+              Kasalukuyang inihahanda ang mga aralin para sa paksang ito.
+            </p>
+            <p className="text-xs text-text-muted">
+              Maaaring magdagdag o mag-publish ng mga bagong aralin sa pamamagitan ng Tanggapan ng Patnugot (Admin CMS).
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {topic.subtopics.map((subtopic, index) => {
+              const letterCode = String.fromCharCode(97 + index) + ".";
 
-            return (
-              <Link
-                key={subtopic.id}
-                href={`/topics/${topic.slug}/${subtopic.slug}`}
-                className="group block p-6 rounded-md border border-border bg-surface hover:border-accent transition-colors shadow-none"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                  <div className="space-y-2 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-primary px-1.5 py-0.5 rounded-sm bg-highlight">
-                        {letterCode}
-                      </span>
-                      <div className="flex items-center gap-1.5 text-xs text-text-muted">
-                        <Clock className="w-3.5 h-3.5 text-primary" />
-                        <span>{subtopic.read_time_minutes} minutong pagbasa</span>
+              return (
+                <Link
+                  key={subtopic.id}
+                  href={`/topics/${topic.slug}/${subtopic.slug}`}
+                  className="group block p-6 rounded-md border border-border bg-surface hover:border-accent transition-colors shadow-none"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <div className="space-y-2 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-primary px-1.5 py-0.5 rounded-sm bg-highlight">
+                          {letterCode}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-xs text-text-muted">
+                          <Clock className="w-3.5 h-3.5 text-primary" />
+                          <span>{subtopic.read_time_minutes} minutong pagbasa</span>
+                        </div>
                       </div>
+
+                      <h3 className="font-serif text-lg sm:text-xl font-bold text-text group-hover:text-primary group-hover:underline transition-colors leading-snug">
+                        {subtopic.title}
+                      </h3>
+
+                      <p className="text-xs sm:text-sm text-text-muted leading-relaxed max-w-3xl">
+                        {subtopic.summary}
+                      </p>
                     </div>
 
-                    <h3 className="font-serif text-lg sm:text-xl font-bold text-text group-hover:text-primary group-hover:underline transition-colors leading-snug">
-                      {subtopic.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-text-muted leading-relaxed max-w-3xl">
-                      {subtopic.summary}
-                    </p>
+                    <div className="shrink-0 flex items-center gap-1 text-xs font-semibold text-primary self-end sm:self-center">
+                      <span>Basahin ang artikulo</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-
-                  <div className="shrink-0 flex items-center gap-1 text-xs font-semibold text-primary self-end sm:self-center">
-                    <span>Basahin ang artikulo</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </section>
     </div>
   );
