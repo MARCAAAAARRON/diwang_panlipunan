@@ -170,3 +170,36 @@ export async function toggleTopicPublish(
 
   return { success: true };
 }
+
+/**
+ * Server Action: Delete a topic (paksa)
+ */
+export async function deleteTopic(id: string): Promise<TopicActionResult> {
+  try {
+    const supabase = await createClient();
+    const { error } = await (supabase.from("topics") as any).delete().eq("id", id);
+
+    if (error) {
+      if ((error as any).code === "PGRST205" || error.message?.includes("schema cache")) {
+        return {
+          error:
+            "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor.",
+        };
+      }
+      return { error: `Hindi natanggal ang paksa: ${error.message}` };
+    }
+  } catch (err: any) {
+    console.warn("Topic delete fallback:", err?.message);
+    return { error: err?.message || "Nagkaroon ng aberya sa pagtanggal ng paksa." };
+  }
+
+  revalidatePath("/");
+  revalidatePath("/home");
+  revalidatePath("/topics");
+  revalidatePath("/admin");
+  revalidatePath("/admin/topics");
+  revalidatePath("/admin/subtopics");
+
+  return { success: true };
+}
+

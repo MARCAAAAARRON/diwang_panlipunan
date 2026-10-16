@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getAllTopics } from "@/lib/content-service";
 import { TopicIcon } from "@/components/ui/topic-icon";
+import { TopicDeleteButton } from "@/components/admin/topic-delete-button";
 import { ExternalLink, Edit3, ArrowLeft } from "lucide-react";
 
 export default async function AdminTopicsPage() {
@@ -114,6 +115,12 @@ export default async function AdminTopicsPage() {
                       <Edit3 className="w-3.5 h-3.5" aria-hidden="true" />
                       <span>I-edit</span>
                     </Link>
+
+                    <TopicDeleteButton
+                      topicId={topic.id}
+                      topicName={topic.name_fil}
+                      subtopicCount={topic.subtopic_count}
+                    />
                   </div>
                 </div>
               </div>

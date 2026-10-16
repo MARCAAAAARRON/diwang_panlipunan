@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Topic } from "@/types/content";
-import { updateTopic, createTopic } from "@/lib/topic-actions";
+import { updateTopic, createTopic, deleteTopic } from "@/lib/topic-actions";
 import { ImageUploader } from "@/components/admin/image-uploader";
-import { Save, ArrowLeft, Check, AlertCircle } from "lucide-react";
+import { Save, ArrowLeft, Check, AlertCircle, Trash2 } from "lucide-react";
 
 interface TopicEditFormProps {
   topic?: Partial<Topic>;
@@ -28,7 +28,38 @@ export function TopicEditForm({ topic = {}, isNew = false }: TopicEditFormProps)
   const [colorToken, setColorToken] = useState(topic.color_token || "--topic-kapaligiran");
   const [bannerUrl, setBannerUrl] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const handleDelete = async () => {
+    if (!topic.id) return;
+    const warning = `Sigurado ka bang nais mong tanggalin ang paksang "${topic.name_fil || "ito"}"?\n\nBabala: Kapag tinanggal ito, mabubura rin ang lahat ng kaugnay na aralin sa ilalim nito. Hindi na ito maibabalik.`;
+    if (!window.confirm(warning)) {
+      return;
+    }
+
+    setIsDeleting(true);
+    setMessage(null);
+    try {
+      const res = await deleteTopic(topic.id);
+      if (res?.error) {
+        setMessage({ type: "error", text: res.error });
+      } else {
+        setMessage({
+          type: "success",
+          text: "Matagumpay na natanggal ang paksa!",
+        });
+        setTimeout(() => {
+          router.push("/admin/topics");
+          router.refresh();
+        }, 800);
+      }
+    } catch (err: any) {
+      setMessage({ type: "error", text: err?.message || "Nagkaroon ng aberya sa pagtanggal ng paksa." });
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -271,6 +302,32 @@ export function TopicEditForm({ topic = {}, isNew = false }: TopicEditFormProps)
           />
         </div>
       </div>
+
+      {/* Danger Zone: Deletion (Only for existing topics) */}
+      {!isNew && topic.id && (
+        <div className="border border-red-200 dark:border-red-900/50 rounded-md bg-red-50/40 dark:bg-red-950/20 p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-red-700 dark:text-red-400">
+                Mapanganib na Sona: Pagtanggal ng Paksa
+              </h3>
+              <p className="text-xs text-[var(--color-text-muted)] max-w-xl leading-relaxed">
+                Kapag tinanggal ang paksang ito, awtomatikong mabubura rin ang lahat ng mga aralin, sanggunian, at komento na nakatala sa ilalim nito. Hindi na ito maibabalik.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={isDeleting || isSaving}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-red-600 text-white hover:bg-red-700 text-xs font-semibold font-mono uppercase tracking-wider transition-colors disabled:opacity-50 cursor-pointer shrink-0"
+            >
+              <Trash2 className="w-4 h-4" aria-hidden="true" />
+              <span>{isDeleting ? "Tinatanggal..." : "Tanggalin ang Paksa"}</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Action Buttons */}
       <div className="flex items-center justify-between pt-2">
