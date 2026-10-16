@@ -76,12 +76,21 @@ export async function createSubtopic(
             "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor.",
         };
       }
+      if ((error as any).code === "PGRST116" || error.message?.includes("coerce") || (error as any).code === "42501") {
+        return {
+          error:
+            "Hindi nalikha ang aralin: Wala kang sapat na pahintulot (Admin o Editor) o hindi tinanggap ng database ang tala.",
+        };
+      }
       return { error: `Hindi nalikha ang aralin: ${error.message}` };
     }
 
+    revalidatePath("/");
+    revalidatePath("/home");
     revalidatePath("/topics");
     revalidatePath("/admin");
     revalidatePath("/admin/subtopics");
+    revalidatePath("/api/navigation");
     revalidatePath("/", "layout");
 
     return {
@@ -161,12 +170,21 @@ export async function updateSubtopic(
             "Hindi pa nailalapat ang database tables sa Supabase. Pakipatakbo ang 'supabase/SETUP_ALL.sql' sa Supabase Dashboard -> SQL Editor.",
         };
       }
+      if ((error as any).code === "PGRST116" || error.message?.includes("coerce") || (error as any).code === "42501") {
+        return {
+          error:
+            "Hindi na-save ang aralin: Wala kang sapat na pahintulot (Admin o Editor) o hindi na umiiral ang aralin sa database.",
+        };
+      }
       return { error: `Hindi na-save ang aralin: ${error.message}` };
     }
 
+    revalidatePath("/");
+    revalidatePath("/home");
     revalidatePath("/topics");
     revalidatePath("/admin");
     revalidatePath("/admin/subtopics");
+    revalidatePath("/api/navigation");
     revalidatePath("/", "layout");
 
     return {
@@ -196,9 +214,13 @@ export async function deleteSubtopic(id: string): Promise<SubtopicActionResult> 
     console.warn("Subtopic delete fallback:", err?.message);
   }
 
-  revalidatePath("/topics");
-  revalidatePath("/admin");
-  revalidatePath("/admin/subtopics");
+    revalidatePath("/");
+    revalidatePath("/home");
+    revalidatePath("/topics");
+    revalidatePath("/admin");
+    revalidatePath("/admin/subtopics");
+    revalidatePath("/api/navigation");
+    revalidatePath("/", "layout");
 
   return { success: true };
 }

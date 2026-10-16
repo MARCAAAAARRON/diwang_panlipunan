@@ -194,6 +194,16 @@ $$;
 
 comment on function public.is_admin is 'Returns true if authenticated user holds the admin role in public.profiles.';
 
+create or replace function public.is_staff()
+returns boolean language sql security definer set search_path = public stable as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role in ('admin', 'editor')
+  );
+$$;
+
+comment on function public.is_staff is 'Returns true if authenticated user holds admin or editor role in public.profiles.';
+
 -- -----------------------------------------------------------------------------
 -- 3. Enable Row Level Security (RLS) on all tables
 -- -----------------------------------------------------------------------------
@@ -263,19 +273,22 @@ create policy "Anyone can view published subtopics of published topics or admin"
   );
 
 drop policy if exists "Only admins can insert subtopics" on public.subtopics;
-create policy "Only admins can insert subtopics"
+drop policy if exists "Admins and editors can insert subtopics" on public.subtopics;
+create policy "Admins and editors can insert subtopics"
   on public.subtopics for insert
-  with check (public.is_admin());
+  with check (public.is_staff());
 
 drop policy if exists "Only admins can update subtopics" on public.subtopics;
-create policy "Only admins can update subtopics"
+drop policy if exists "Admins and editors can update subtopics" on public.subtopics;
+create policy "Admins and editors can update subtopics"
   on public.subtopics for update
-  using (public.is_admin());
+  using (public.is_staff());
 
 drop policy if exists "Only admins can delete subtopics" on public.subtopics;
-create policy "Only admins can delete subtopics"
+drop policy if exists "Admins and editors can delete subtopics" on public.subtopics;
+create policy "Admins and editors can delete subtopics"
   on public.subtopics for delete
-  using (public.is_admin());
+  using (public.is_staff());
 
 -- -----------------------------------------------------------------------------
 -- 7. RLS Policies: Sources
@@ -287,23 +300,26 @@ create policy "Anyone can view citations for published subtopics or admin"
     exists (
       select 1 from public.subtopics s
       where s.id = subtopic_id and s.is_published = true
-    ) or public.is_admin()
+    ) or public.is_staff()
   );
 
 drop policy if exists "Only admins can insert sources" on public.sources;
-create policy "Only admins can insert sources"
+drop policy if exists "Admins and editors can insert sources" on public.sources;
+create policy "Admins and editors can insert sources"
   on public.sources for insert
-  with check (public.is_admin());
+  with check (public.is_staff());
 
 drop policy if exists "Only admins can update sources" on public.sources;
-create policy "Only admins can update sources"
+drop policy if exists "Admins and editors can update sources" on public.sources;
+create policy "Admins and editors can update sources"
   on public.sources for update
-  using (public.is_admin());
+  using (public.is_staff());
 
 drop policy if exists "Only admins can delete sources" on public.sources;
-create policy "Only admins can delete sources"
+drop policy if exists "Admins and editors can delete sources" on public.sources;
+create policy "Admins and editors can delete sources"
   on public.sources for delete
-  using (public.is_admin());
+  using (public.is_staff());
 
 -- -----------------------------------------------------------------------------
 -- 8. RLS Policies: Feedback
