@@ -7,52 +7,24 @@ export default function LandingPage() {
   const topics = [
     {
       num: "01",
-      titleFil: "Kapaligiran at Pagbabago ng Klima",
-      titleEn: "Environment and Climate Change",
-      desc: "Pagsusuri sa krisis sa kalikasan, katatagan sa kalamidad, at makatarungang pangangalaga sa likas-yaman ng Pilipinas.",
-      slug: "kapaligiran",
+      titleFil: "Kahalagahan ng Pag-aaral ng mga Kontemporaryong Isyu",
+      titleEn: "Importance of Studying Contemporary Issues",
+      desc: "Paglinang sa kritikal na pag-iisip, pagiging mapanuri, at aktibong pakikilahok sa mga napapanahong usapin sa lipunan.",
+      slug: "kahalagahan-pag-aaral-kontemporaryong-isyu",
     },
     {
       num: "02",
-      titleFil: "Ekonomiya at Kabuhayan",
-      titleEn: "Economy and Livelihood",
-      desc: "Pag-unawa sa implasyon, karapatan ng manggagawa, repormang agraryo, at estruktural na pag-unlad ng kabuhayan.",
-      slug: "ekonomiya",
+      titleFil: "Mga Suliraning Pangkapaligiran",
+      titleEn: "Environmental Issues",
+      desc: "Pagsusuri sa krisis pangklima, solid waste management, deforestation, at makatarungang pangangalaga sa kalikasan.",
+      slug: "mga-suliraning-pangkapaligiran",
     },
     {
       num: "03",
-      titleFil: "Pamamahala at Demokrasya",
-      titleEn: "Politics and Governance",
-      desc: "Mapanuring pagsisiyasat sa mga pampublikong institusyon, pananagutan ng opisyal, at demokratikong pakikilahok.",
-      slug: "pamahalaan",
-    },
-    {
-      num: "04",
-      titleFil: "Karapatang Pantao at Katarungang Panlipunan",
-      titleEn: "Human Rights and Social Justice",
-      desc: "Pagtataguyod ng kalayaang sibil, karapatan ng mga katutubo, hustisyang panlipunan, at pagpapalakas sa marhinalisadong sektor.",
-      slug: "karapatang-pantao",
-    },
-    {
-      num: "05",
-      titleFil: "Edukasyon at Lipunan",
-      titleEn: "Education and Society",
-      desc: "Pagtugon sa kakulangan sa literasing sibiko, pampublikong pasilidad, at pantay na karapatan sa de-kalidad na karunungan.",
-      slug: "edukasyon",
-    },
-    {
-      num: "06",
-      titleFil: "Globalisasyon at Pandaigdigang Ugnayan",
-      titleEn: "Globalization and Global Issues",
-      desc: "Pagsusuri sa ugnayang panlabas, manggagawang migrante (OFW), soberanya, at panrehiyong kooperasyon sa Timog-Silangang Asya.",
-      slug: "teknolohiya",
-    },
-    {
-      num: "07",
-      titleFil: "Likas-Kayang Kaunlaran",
-      titleEn: "Sustainable Development",
-      desc: "Pagtitiyak ng balanseng pag-unlad ng ekonomiya na may pag-iingat sa kapakanan ng mga susunod na salinlahi.",
-      slug: "kalusugan",
+      titleFil: "Mga Isyung Pang-ekonomiya",
+      titleEn: "Economic Issues",
+      desc: "Pagsusuri sa globalisasyon, kalagayan ng mga manggagawa, migrasyon, at makatarungang kabuhayan sa lipunan.",
+      slug: "mga-isyung-pang-ekonomiya",
     },
   ];
 
@@ -191,11 +163,11 @@ export default function LandingPage() {
                 Mga Paksa ng Diwang Panlipunan
               </h2>
               <p className="text-sm text-text-muted mt-1">
-                Pitong pangunahing laranang panlipunan para sa mapanuring pagtalakay, pananaliksik, at pagmumulat.
+                Pangunahing mga laranang panlipunan para sa mapanuring pagtalakay, pananaliksik, at pagmumulat sa mga kontemporaryong isyu.
               </p>
             </div>
             <div className="text-xs font-mono font-semibold uppercase tracking-wider text-text-muted">
-              7 LARANANG PAGSUSURI
+              {topics.length} LARANANG PAGSUSURI
             </div>
           </div>
 

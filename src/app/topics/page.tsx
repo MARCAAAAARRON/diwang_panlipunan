@@ -7,7 +7,7 @@ import { getAllTopics } from "@/lib/content-service";
 
 export const metadata = {
   title: "Mga Paksa — Diwang Panlipunan",
-  description: "Pitong pangunahing laranang panlipunan para sa mapanuring pagtalakay at pananaliksik sa Pilipinas.",
+  description: "Pangunahing mga laranang panlipunan para sa mapanuring pagtalakay at pananaliksik sa mga kontemporaryong isyu sa Pilipinas.",
 };
 
 export default async function TopicsPage() {
@@ -36,7 +36,7 @@ export default async function TopicsPage() {
               Mga Paksa
             </h1>
             <p className="text-sm sm:text-base text-text-muted mt-2 max-w-2xl leading-relaxed">
-              Pitong pangunahing laranang panlipunan para sa mapanuring pagtalakay, masusing pananaliksik, at pampublikong diskurso sa Pilipinas.
+              Pangunahing mga laranang panlipunan para sa mapanuring pagtalakay, masusing pananaliksik, at pampublikong diskurso sa Pilipinas.
             </p>
           </div>
 

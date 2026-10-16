@@ -109,7 +109,7 @@ export default function HomePage() {
             </h2>
           </div>
           <span className="text-xs font-mono font-semibold text-text-muted">
-            Kabuuang 7 Paksang Aralin
+            Kabuuang {CANONICAL_TOPICS.length} Paksang Aralin
           </span>
         </div>
 
