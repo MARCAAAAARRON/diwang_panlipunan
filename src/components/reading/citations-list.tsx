@@ -63,11 +63,14 @@ export function CitationsList({ sources }: CitationsListProps) {
                       {source.author}
                     </span>
                   )}
-                  {source.published_date && (
-                    <span className="mr-1">
-                      ({new Date(source.published_date).getFullYear() || source.published_date}).
-                    </span>
-                  )}
+                  <span className="mr-1">
+                    ({(() => {
+                      if (!source.published_date) return "n.d.";
+                      const parsed = new Date(source.published_date);
+                      const year = parsed.getFullYear();
+                      return !isNaN(year) ? year : source.published_date;
+                    })()}).
+                  </span>
                   <span className="italic mr-1">
                     &ldquo;{source.title}&rdquo;
                   </span>

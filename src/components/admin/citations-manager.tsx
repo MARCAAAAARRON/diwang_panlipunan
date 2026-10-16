@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Source } from "@/types/content";
 import { saveCitations } from "@/lib/citation-actions";
 import {
@@ -24,6 +25,7 @@ export function CitationsManager({
   subtopicId,
   initialSources,
 }: CitationsManagerProps) {
+  const router = useRouter();
   const [sources, setSources] = useState<Source[]>(initialSources || []);
   const [isSaving, setIsSaving] = useState(false);
   const [status, setStatus] = useState<{
@@ -86,11 +88,15 @@ export function CitationsManager({
       if (res.error) {
         setStatus({ type: "error", text: res.error });
       } else {
+        if (res.sources && res.sources.length > 0) {
+          setSources(res.sources);
+        }
         setStatus({
           type: "success",
           text: "Matagumpay na nai-save ang mga sanggunian!",
         });
-        setTimeout(() => setStatus(null), 3000);
+        router.refresh();
+        setTimeout(() => setStatus(null), 3500);
       }
     } catch (err: any) {
       setStatus({
@@ -273,36 +279,39 @@ export function CitationsManager({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="space-y-1">
                     <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
-                      Taon / Petsa
+                      Taon / Petsa (Opsyonal)
                     </label>
                     <input
                       type="text"
-                      placeholder="Hal: 2024 o 2024-03-15"
+                      placeholder='Hal: 2024, "n.d.", o iwang blangko'
                       value={source.published_date || ""}
                       onChange={(e) =>
                         updateSourceField(index, "published_date", e.target.value)
                       }
                       className="w-full px-2.5 py-1.5 text-xs rounded border border-[var(--color-input-border)] bg-[var(--color-surface)] text-[var(--color-text)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] font-mono"
                     />
+                    <span className="text-[10px] text-[var(--color-text-muted)] block font-sans">
+                      Maaaring iwang blangko o ilagay ang &quot;n.d.&quot; kung walang petsa.
+                    </span>
                   </div>
 
                   <div className="space-y-1 sm:col-span-2">
                     <label className="block text-xs font-mono font-semibold uppercase tracking-[0.06em] text-[var(--color-text)]">
-                      URL ng Sanggunian (HTTPS)
+                      URL ng Sanggunian (Opsyonal)
                     </label>
                     <div className="flex items-center gap-1.5">
                       <input
-                        type="url"
-                        placeholder="https://..."
+                        type="text"
+                        placeholder="https://... o link ng artikulo (opsyonal)"
                         value={source.url || ""}
                         onChange={(e) =>
                           updateSourceField(index, "url", e.target.value)
                         }
                         className="w-full px-2.5 py-1.5 text-xs rounded border border-[var(--color-input-border)] bg-[var(--color-surface)] text-[var(--color-text)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] font-mono"
                       />
-                      {source.url && /^https?:\/\//i.test(source.url) && (
+                      {source.url && (
                         <a
-                          href={source.url}
+                          href={source.url.startsWith("http") ? source.url : `https://${source.url}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           title="Subukan ang link"
